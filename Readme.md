@@ -18,6 +18,14 @@
 
 - 病気のため休学することになったので特別な配慮をして欲しい
 
+# 講義資料とサンプルコード
+
+- [講義資料](https://github.com/is-prg1b/lecture)
+
+- サンプルコード: 講義の進捗ごとにリポジトリを用意します．
+
+    [lx01](https://github.com/is-prg1b/lx01) / [lx02](https://github.com/is-prg1b/lx02) / [lx03](https://github.com/is-prg1b/lx03) / [lx04](https://github.com/is-prg1b/lx04) / [lx05](https://github.com/is-prg1b/lx05) / [lx06](https://github.com/is-prg1b/lx06) / [lx07](https://github.com/is-prg1b/lx07) / [lx08](https://github.com/is-prg1b/lx08) / [lx09](https://github.com/is-prg1b/lx09) / [lx10](https://github.com/is-prg1b/lx10) / [lx11](https://github.com/is-prg1b/lx11) / [lx12](https://github.com/is-prg1b/lx12) / [lx13](https://github.com/is-prg1b/lx13) / [lx14](https://github.com/is-prg1b/lx14)
+
 # Gitリポジトリの初期化
 
 講義関係で15個のリポジトリを作成します．以下のそれぞれのコマンドを実行するとリポジトリが作成されます．
