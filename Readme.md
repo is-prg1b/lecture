@@ -1,3 +1,3 @@
-# 講義スライド
+# ウェブサイト
 
-- [Day1](https://is-prg1b.github.io/lecture/day01.pdf)
+授業で使ったスライドやサンプルコードは[こちらから入手できます](https://is-prg1b.github.io/lecture/)
