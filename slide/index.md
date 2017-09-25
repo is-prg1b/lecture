@@ -3,6 +3,12 @@ title: プログラミング第一
 css: ["lib/reveal.js-3.5.0/css/theme/solarized.css", "lib/kw.css"]
 ---
 
+<style>
+body {
+  margin: 5em;
+}
+</style>
+
 # 講義内容についての質問など
 
 [質問，疑問等の受け付け先](https://github.com/is-prg1b/lecture/issues/new)．受け付けた質問は教員，TA，履修生で共有されます．これ以外の人々には公開されません．
@@ -25,13 +31,39 @@ css: ["lib/reveal.js-3.5.0/css/theme/solarized.css", "lib/kw.css"]
 
 # 講義資料とサンプルコード
 
-- [講義資料]
+- 講義資料
 
-    - [day01](https://is-prg1b.github.io/lecture/day01.pdf)
+    [day01](https://github.com/is-prg1b/lecture/raw/master/docs/day01.pdf) <!-- /
+    [day02](https://github.com/is-prg1b/lecture/raw/master/docs/day02.pdf) /
+    [day03](https://github.com/is-prg1b/lecture/raw/master/docs/day03.pdf) /
+    [day04](https://github.com/is-prg1b/lecture/raw/master/docs/day04.pdf) /
+    [day05](https://github.com/is-prg1b/lecture/raw/master/docs/day05.pdf) /
+    [day06](https://github.com/is-prg1b/lecture/raw/master/docs/day06.pdf) /
+    [day07](https://github.com/is-prg1b/lecture/raw/master/docs/day07.pdf) /
+    [day08](https://github.com/is-prg1b/lecture/raw/master/docs/day08.pdf) /
+    [day09](https://github.com/is-prg1b/lecture/raw/master/docs/day09.pdf) /
+    [day10](https://github.com/is-prg1b/lecture/raw/master/docs/day10.pdf) /
+    [day11](https://github.com/is-prg1b/lecture/raw/master/docs/day11.pdf) /
+    [day12](https://github.com/is-prg1b/lecture/raw/master/docs/day12.pdf) /
+    [day13](https://github.com/is-prg1b/lecture/raw/master/docs/day13.pdf) /
+    [day14](https://github.com/is-prg1b/lecture/raw/master/docs/day14.pdf) -->
 
 - サンプルコード: 講義の進捗ごとにリポジトリを用意します．
 
-    [lx01](https://github.com/is-prg1b/lx01) / [lx02](https://github.com/is-prg1b/lx02) / [lx03](https://github.com/is-prg1b/lx03) / [lx04](https://github.com/is-prg1b/lx04) / [lx05](https://github.com/is-prg1b/lx05) / [lx06](https://github.com/is-prg1b/lx06) / [lx07](https://github.com/is-prg1b/lx07) / [lx08](https://github.com/is-prg1b/lx08) / [lx09](https://github.com/is-prg1b/lx09) / [lx10](https://github.com/is-prg1b/lx10) / [lx11](https://github.com/is-prg1b/lx11) / [lx12](https://github.com/is-prg1b/lx12) / [lx13](https://github.com/is-prg1b/lx13) / [lx14](https://github.com/is-prg1b/lx14)
+    [day01](https://github.com/is-prg1b/lx01) <!-- /
+    [day02](https://github.com/is-prg1b/lx02) /
+    [day03](https://github.com/is-prg1b/lx03) /
+    [day04](https://github.com/is-prg1b/lx04) /
+    [day05](https://github.com/is-prg1b/lx05) /
+    [day06](https://github.com/is-prg1b/lx06) /
+    [day07](https://github.com/is-prg1b/lx07) /
+    [day08](https://github.com/is-prg1b/lx08) /
+    [day09](https://github.com/is-prg1b/lx09) /
+    [day10](https://github.com/is-prg1b/lx10) /
+    [day11](https://github.com/is-prg1b/lx11) /
+    [day12](https://github.com/is-prg1b/lx12) /
+    [day13](https://github.com/is-prg1b/lx13) /
+    [day14](https://github.com/is-prg1b/lx14) -->
 
 # Gitリポジトリの初期化
 
