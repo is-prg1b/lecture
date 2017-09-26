@@ -40,7 +40,7 @@ code {
 # 講義資料とサンプルコード
 
 講義資料
-: - [day01](https://github.com/is-prg1b/lecture/raw/master/docs/day01.pdf) <!--
+: - [day01](https://github.com/is-prg1b/lecture/raw/master/slides/day01.pdf) <!--
     - [day02](https://github.com/is-prg1b/lecture/raw/master/docs/day02.pdf)
     - [day03](https://github.com/is-prg1b/lecture/raw/master/docs/day03.pdf)
     - [day04](https://github.com/is-prg1b/lecture/raw/master/docs/day04.pdf)
