@@ -19,3 +19,7 @@ code.sourceCode {
   font-weight: 500;
   line-height: 1.5;
 }
+
+.quiz li {
+  padding-bottom: 10ex;
+}

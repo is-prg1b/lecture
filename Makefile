@@ -2,7 +2,7 @@
 
 .SUFFIXES: .html .md .pdf
 .DEFAULT: html
-all: html note
+all: html note quiz
 
 BASE     := localhost:8082
 
@@ -13,6 +13,9 @@ PDF      := $(addprefix docs/pdf/,  $(addsuffix .pdf,  $(SLIDES)))
 
 NOTES    := $(basename $(notdir $(wildcard note/*.md)))
 NOTEHTML := $(addprefix docs/note/, $(addsuffix .html, $(NOTES)))
+
+QUIZ     := $(basename $(notdir $(wildcard quiz/*.md)))
+QUIZHTML := $(addprefix docs/quiz/, $(addsuffix .html, $(QUIZ)))
 
 clean:
 	rm -f $(HTML_TMP) $(HTML) $(NOTES) $(PDF)
@@ -49,15 +52,6 @@ docs/html/%.html: $(HTML_DEV) slide/%.md
 	@phantomjs docs/dev/phantom.js $(slide) $(html2)
 	@echo
 
-pdf: $(PDF)
-
-pdf/%.pdf: docs/%.html
-	$(eval slide := $(basename $(notdir $@)))
-	$(eval pdf := $(addprefix docs/pdf/, $(addsuffix .pdf, $(slide))))
-	$(eval url := $(addprefix http://$(BASE)/, $(addsuffix .html, $(slide))))
-
-	decktape $(url) $(pdf)
-
 note: $(NOTEHTML)
 docs/note/%.html: note/%.md
 	$(eval note := $(basename $(notdir $@)))
@@ -68,6 +62,17 @@ docs/note/%.html: note/%.md
 	  --include-after-body=docs/dev/note.footer \
 	  --standalone --to=html --output=$(html) \
 	  --highlight-style=espresso \
+	  --smart
+
+quiz: $(QUIZHTML)
+docs/quiz/%.html: quiz/%.md
+	$(eval quiz := $(basename $(notdir $@)))
+	$(eval md   := $(addprefix quiz/,      $(addsuffix .md,   $(quiz))))
+	$(eval html := $(addprefix docs/quiz/, $(addsuffix .html, $(quiz))))
+	pandoc $(md) \
+	  --include-in-header=docs/dev/quiz.header \
+	  --standalone --to=html --output=$(html) \
+	  --highlight-style=monochrome \
 	  --smart
 
 server:

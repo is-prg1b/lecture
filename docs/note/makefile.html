@@ -93,7 +93,6 @@ code > span.in { color: #0066ff; font-weight: bold; font-style: italic; } /* Inf
 22
 23
 24
-25
 </pre></td><td class="sourceCode"><pre><code class="sourceCode makefile"><span class="co"># lx01/src/Makefile</span>
 
 <span class="dv">all:</span><span class="dt"> simple simple.s Simple.class</span>
@@ -117,8 +116,7 @@ code > span.in { color: #0066ff; font-weight: bold; font-style: italic; } /* Inf
     scala Simple
 
 <span class="dv">run-j:</span>
-    java -classpath `brew --prefix`/opt/scala/libexec/lib/scala-library.jar:. Simple
-</code></pre></td></tr></table></div>
+    java -classpath `brew --prefix`/opt/scala/libexec/lib/scala-library.jar:. Simple</code></pre></td></tr></table></div>
 <p>まず，わかりやすいところで5-6行目を見てみましょう．ここには，以下のことが記述されています．</p>
 <ul>
 <li><p><code>simple</code> という目的ファイルが <code>simple.c</code> というファイルから構成されること</p></li>

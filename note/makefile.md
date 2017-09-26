@@ -55,8 +55,6 @@ run-s:
 
 run-j:
 	java -classpath `brew --prefix`/opt/scala/libexec/lib/scala-library.jar:. Simple
-
-
 ~~~
 
 まず，わかりやすいところで5-6行目を見てみましょう．ここには，以下のことが記述されています．
