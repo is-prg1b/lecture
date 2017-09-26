@@ -2,7 +2,7 @@
 
 .SUFFIXES: .html .md .pdf
 .DEFAULT: html
-all: html
+all: html note
 
 BASE     := localhost:8082
 
@@ -11,8 +11,11 @@ HTML_TMP := $(addprefix docs/tmp/,  $(addsuffix .html, $(SLIDES)))
 HTML     := $(addprefix docs/html/, $(addsuffix .html, $(SLIDES)))
 PDF      := $(addprefix docs/pdf/,  $(addsuffix .pdf,  $(SLIDES)))
 
+NOTES    := $(basename $(notdir $(wildcard note/*.md)))
+NOTEHTML := $(addprefix docs/note/, $(addsuffix .html, $(NOTES)))
+
 clean:
-	rm -f $(HTML_TMP) $(HTML) $(PDF)
+	rm -f $(HTML_TMP) $(HTML) $(NOTES) $(PDF)
 
 # Markdown -> HTML is achieved in two-stages.
 html: server docs/index.html $(HTML)
@@ -55,8 +58,20 @@ pdf/%.pdf: docs/%.html
 
 	decktape $(url) $(pdf)
 
+note: $(NOTEHTML)
+docs/note/%.html: note/%.md
+	$(eval note := $(basename $(notdir $@)))
+	$(eval md   := $(addprefix note/,      $(addsuffix .md,   $(note))))
+	$(eval html := $(addprefix docs/note/, $(addsuffix .html, $(note))))
+	@pandoc docs/dev/note.yaml $(md) \
+	  --include-in-header=docs/dev/note.header \
+	  --include-after-body=docs/dev/note.footer \
+	  --standalone --to=html --output=$(html) \
+	  --highlight-style=espresso \
+	  --smart
+
 server:
-	wget --quiet --spider "http://$(BASE)/" || (cd docs; php -S $(BASE) &)
+	@wget --quiet --spider "http://$(BASE)/" || (cd docs; php -S $(BASE) &)
 
 shutdown:
-	killall php
+	@killall php

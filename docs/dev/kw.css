@@ -1,0 +1,21 @@
+body {
+  margin: 5em;
+  line-height: 1.7;
+}
+
+p code {
+  color: #66f;
+  background-color: transparent;
+}
+
+.lineNumbers pre {
+  font-family: source-code-pro, monospace;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+code.sourceCode {
+  font-family: source-code-pro, monospace;
+  font-weight: 500;
+  line-height: 1.5;
+}

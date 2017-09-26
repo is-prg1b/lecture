@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Ken Wakita (https://is-prg1b.github.io/lecture/)" />
+  <title>makeとMakefile</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; background-color: #2a211c; color: #bdae9d; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; background-color: #2a211c; color: #bdae9d; border-right: 1px solid #bdae9d; }
+td.sourceCode { padding-left: 5px; }
+pre, code { color: #bdae9d; background-color: #2a211c; }
+code > span.kw { color: #43a8ed; font-weight: bold; } /* Keyword */
+code > span.dt { text-decoration: underline; } /* DataType */
+code > span.dv { color: #44aa43; } /* DecVal */
+code > span.bn { color: #44aa43; } /* BaseN */
+code > span.fl { color: #44aa43; } /* Float */
+code > span.ch { color: #049b0a; } /* Char */
+code > span.st { color: #049b0a; } /* String */
+code > span.co { color: #0066ff; font-style: italic; } /* Comment */
+code > span.al { color: #ffff00; } /* Alert */
+code > span.fu { color: #ff9358; font-weight: bold; } /* Function */
+code > span.er { color: #ffff00; font-weight: bold; } /* Error */
+code > span.wa { color: #ffff00; font-weight: bold; } /* Warning */
+code > span.cn { } /* Constant */
+code > span.sc { color: #049b0a; } /* SpecialChar */
+code > span.vs { color: #049b0a; } /* VerbatimString */
+code > span.ss { color: #049b0a; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { } /* Variable */
+code > span.cf { color: #43a8ed; font-weight: bold; } /* ControlFlow */
+code > span.op { } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { font-weight: bold; } /* Preprocessor */
+code > span.at { } /* Attribute */
+code > span.do { color: #0066ff; font-style: italic; } /* Documentation */
+code > span.an { color: #0066ff; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.co { color: #0066ff; font-weight: bold; font-style: italic; } /* Comment */
+code > span.in { color: #0066ff; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link ref="stylesheet" type="text/css" href="../lib/reveal.js-3.5.0/css/theme/solarized.css">
+  <link rel="stylesheet" type="text/css" href="../dev/kw.css">
+</head>
+<body>
+<div id="header">
+<h1 class="title">makeとMakefile</h1>
+<h2 class="author">Ken Wakita (<a href="https://is-prg1b.github.io/lecture/" class="uri">https://is-prg1b.github.io/lecture/</a>)</h2>
+<h3 class="date">2017年9月26日</h3>
+</div>
+<p>これまで，みなさんが作ってきたソフトウェアは概ねひとつのソースプログラムを実行する場合が多かったのではないでしょうか．でも，世の中の多くのソフトウェアは簡単なものでも複数のファイルやデータの組み合わせから構成されます．数千〜数万のファイルやデータから構成される複雑なソフトウェアも珍しくはありません．</p>
+<p>また，ひとつのソフトウェアが複数のモジュールやプログラムから構成される場合もあります．</p>
+<p>このように，複数のファイルやデータを組合せて，さまざまなプログラムを構成するときに，その組合せの手順書を記述したものが <code>Makefile</code> です．</p>
+<p><code>Makefile</code> の書式は基本的には以下のような雛形に沿った記述を列挙したものです．</p>
+<div class="sourceCode" id="makefile-template"><pre class="sourceCode makefile"><code class="sourceCode makefile"><span class="dv">目的ファイル:</span><span class="dt">   依存ファイル1   依存ファイル2 ...</span>
+        ビルドコマンド1
+        ビルドコマンド2
+        ...</code></pre></div>
+<p>この雛形は，</p>
+<ul>
+<li><p><code>目的ファイル</code> を作成するには，いくつかのファイル（<code>依存ファイル1</code>，<code>依存ファイル2</code>，…）を利用すること，</p></li>
+<li><p><code>目的ファイル</code> を作成する方法は，ビルドコマンド列（<code>ビルドコマンド1</code>，<code>ビルドコマンド2</code>，…）を順次実行すること，そして</p></li>
+<li><p><code>目的ファイル</code>の作成に必要な依存ファイル群のうちひとつでも更新されたら，<code>目的ファイル</code>を作り直すことが指定されています．</p></li>
+</ul>
+<p>一旦，<code>Makefile</code> を書けば，その使い方は簡単です．単に <code>make</code> コマンドを実行するだけです．<code>make</code> コマンドは <code>Makefile</code> の記述を読み，そこに記述されたファイル群の更新日時を検査して，依存関係に沿って更新が必要なファイルを検出したら，該当するビルドコマンドを実行して，ファイルの更新を試みます．</p>
+<p>サンプルプロジェクト <code>lx01</code> に含まれる <code>Makefile</code> の内容について見てみましょう．</p>
+<div class="sourceCode" id="lx01-makefile"><table class="sourceCode makefile numberLines"><tr class="sourceCode"><td class="lineNumbers"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+</pre></td><td class="sourceCode"><pre><code class="sourceCode makefile"><span class="co"># lx01/src/Makefile</span>
+
+<span class="dv">all:</span><span class="dt"> simple simple.s Simple.class</span>
+
+<span class="dv">simple:</span><span class="dt"> simple.c</span>
+    clang -o simple simple.c
+
+<span class="dv">simple.s:</span><span class="dt"> simple.c</span>
+    clang -O0 -S simple.c
+
+<span class="dv">Simple.class:</span><span class="dt"> simple.scala</span>
+    scalac simple.scala
+
+<span class="dv">clean:</span>
+    rm -f simple simple.s *.class
+
+<span class="dv">run-c:</span>
+    ./simple
+
+<span class="dv">run-s:</span>
+    scala Simple
+
+<span class="dv">run-j:</span>
+    java -classpath `brew --prefix`/opt/scala/libexec/lib/scala-library.jar:. Simple
+</code></pre></td></tr></table></div>
+<p>まず，わかりやすいところで5-6行目を見てみましょう．ここには，以下のことが記述されています．</p>
+<ul>
+<li><p><code>simple</code> という目的ファイルが <code>simple.c</code> というファイルから構成されること</p></li>
+<li><p><code>simple.c</code> の最終更新日時が <code>simple</code> の最終更新日時よりも新しいときには，<code>simple</code> をビルドし直さなくてはいけないこと</p></li>
+<li><p><code>simple</code> をビルドするためには <code>clang -o simple simple.c</code> というコマンドを実行すること</p>
+<ul>
+<li><p><code>clang</code> は C 言語のためのコンパイラの名前</p></li>
+<li><p><code>clang</code> の <code>-o</code> オプションはコンパイラの生成物のファイル名を指定します．</p></li>
+<li><p>このコマンドは <code>simple.c</code> という名前のファイルを読み込み，C 言語のための <code>clang</code> コンパイラを利用して，<code>simple</code> という実行可能ファイルを生成するものです．<code>clang</code> について，もっと詳しい説明については<code>clang</code>のマニュアル (<code>man clang</code>) を見て下さい．</p></li>
+</ul></li>
+</ul>
+<p>この記述があるので <code>make simple</code> というように <code>make</code> コマンドに目的ファイルの <code>simple</code> を渡すと，<code>make</code> は <code>simple</code> を作成するために必要最小限の作業を実施します．現時点で <code>simple</code> が存在していなかったり，その最終更新日時が <code>simple.c</code> より古い場合には <code>make simple</code> によって，新しい <code>simple</code> がビルドされます．すでに <code>simple</code> が存在していて，その最終更新日時が <code>simple.c</code> の最終更新日時よりも新しい場合には，<code>make simple</code> は何もしません．</p>
+<p><code>simple</code> を作成するために <code>simple.c</code> をプログラムする作業は，(1) テキストエディタ等で <code>simple.c</code> を修正し，(2) <code>make simple</code> を実行してビルドし，(3) <code>simple</code> を実行してテストする作業の繰り返しが普通です．<code>Makefile</code> を利用することで，複雑なコンパイラのオプションを毎回，記述する手間から解放されます．</p>
+<p>8-9 行目には，同じく <code>simple.c</code> という名前のファイルから <code>simple.s</code> という別のファイルを作成する方法が記述されています．<code>simple.s</code> は <code>simple.c</code> に相当するアセンブリコードのファイルの名前です．</p>
+<ul>
+<li><p><code>clang</code> コマンドの <code>-O0</code> オプションはCコンパイラの最適化を無効化する指定です．</p></li>
+<li><p><code>clang</code> コマンドの <code>-S</code> オプションはアセンブリコードを出力する指定です．このオプションが与えられると<code>clang</code>は<code>.s</code>という拡張子のファイルにアセンブリコードを出力します．</p></li>
+</ul>
+<p>11-12 行目には<code>scalac</code> （Scala言語のコンパイラ）を利用して，<code>Simple.class</code> という scala の実行可能形式のファイルを <code>simple.scala</code> からコンパイルする方法が記述されている．</p>
+<p>3 行目の記述 <code>all: simple simple.s Simple.class</code> は依存性だけが列挙されており，ビルドコマンドの記述はない．この記述は <code>all</code> をビルドするためには，まずは <code>simple</code> と <code>simple.s</code> と <code>Simple.class</code> が必要だと指定している．すでに見たようにこれらのファイルにはビルドの記述があるので，<code>make</code> は <code>all</code> のビルドの手始めにこれら三つのファイルを作成しようとする．<code>all</code> にはビルドコマンドは指定されていないので，三つのファイルができたならば，その時点で <code>all</code> のビルドは成功したことになる．<code>all</code> のような記述は，複数の目的ファイルをまとめて作成する規則の記述に便利である．この例の場合 <code>make all</code> を実行すれば三つのファイルのビルドが実施される．</p>
+<p><code>make</code> が引数なしで呼ばれた場合は <code>Makefile</code> のなかの最初の規則を実行することになっている．このため，単に <code>make</code> を実行することは上の <code>Makefile</code> の場合は <code>make all</code> を実行することにあたる．ここまでの規則たちは <code>simple.c</code> と <code>simple.scala</code> を元とするビルド規則である．すでに述べたように <code>make</code> は各ファイルの最終更新日時に応じて必要最小限の作業のみを実施する．このため <code>simple.c</code> の作業を実施しているときも <code>simple.scala</code> の作業を実施しているときでも，単に <code>make</code> コマンドを実行すれば，最後に更新したソースプログラムに依存するファイルのビルドのみが実施される．このことは大きなソフトウェア開発において重要である．なぜなら，数千にも及ぶファイルのなかでたったひとつのファイルが更新されたばかりに，すべてのプログラムの再コンパイルを実施するとしたら，コンパイル作業に膨大な時間を要し，ソフトウェア開発が滞るからだ．<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></p>
+<p>14-15 行目の<code>clean:</code> で始まる規則は依存性がない．しかし，<code>clean</code> という名前のファイルは存在しないので <code>make clean</code> を実行すれば，そのビルドコマンドは常に実行される．<code>clean</code> 規則のビルドコマンド <code>rm -f simple simple.s *.class</code> はファイルを削除する<code>rm</code>コマンドを利用して，5-12行目の規則が生成するファイル群を削除する．それらのファイルが存在しない場合，<code>rm</code> コマンドはエラーを出力するが<code>-f</code>オプションによって，エラーメッセージの出力を抑制している．</p>
+<p>他人にソフトウェアを受け渡すときは，普通は必要最小限の構成としてプログラムのみを送り，コンパイル生成物を送るべきではない．このような場合，一旦 <code>make clean</code> するだけで，フォルダの内容をきれいに整えることができるので便利である．</p>
+<p><code>Makefile</code> はプログラムの実行のためのコマンドを記述する目的でもしばしば利用される．たとえば，23-25行目には，<code>scalac</code>の生成物である <code>Simple.class</code> を Java のインタプリタを用いて実行する方法を記述している．このような長いコマンドを正確に記憶することも，それを入力することも困難である．このような複雑な実行文も<code>Makefile</code>の規則として記述すれば単に<code>make run-j</code>を実行するだけで実行することができる．</p>
+<p>なお，本ウェブページの作成にあたっても，Markdown形式と呼ばれる簡素な記述から，煩瑣なHTML形式に<code>pandoc</code>コマンドを利用して変換しているのだが，この<a href="https://github.com/is-prg1b/lecture/blob/master/Makefile">思いの外に複雑な作業も<code>Makefile</code>を用いて管理</a>している．本格的は <code>Makefile</code> 記述の実際を学ぶ一助になれば幸いである．</p>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>かつて，ソフトウェアのビルドに長大な時間がかかったときには，たとえ <code>make</code> を利用してもビルド作業に何十分もかかった．ビルドの合間に剣玉をしていたために当時のIBM東京基礎研の研究員はん剣玉上手だった．<a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
+<script src="//use.edgefonts.net/source-code-pro.js"></script>
+<script src="../dev/jquery-3.2.1.min.js"></script>
+</body>
+</html>

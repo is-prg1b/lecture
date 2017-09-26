@@ -14,6 +14,7 @@ code {
 </style>
 
 <script type="text/javascript" src="lib/reveal.js-3.5.0/plugin/highlight/highlight.js"></script>
+<script>hljs.initHightlightingOnLoad();</script>
 
 # 講義内容についての質問など
 
@@ -76,7 +77,7 @@ code {
 
 以下のような要領で`git`コマンドを実行するとGitHub上のリポジトリを複製できます．
 
-```
+```bash
 git clone git@github.com:is-prg1b/lecture
 git clone git@github.com:is-prg1b/lx01
 ```
