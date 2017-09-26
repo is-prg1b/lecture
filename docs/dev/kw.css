@@ -23,3 +23,7 @@ code.sourceCode {
 .quiz li {
   padding-bottom: 10ex;
 }
+
+strong {
+  color: #d22;
+}

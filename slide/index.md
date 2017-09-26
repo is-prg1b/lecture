@@ -1,9 +1,9 @@
 ---
 title: プログラミング第一
-css: ["lib/reveal.js-3.5.0/css/theme/solarized.css", "lib/kw.css"]
+css: ["lib/reveal.js-3.5.0/css/theme/solarized.css", "dev/kw.css"]
 ---
 
-<style>
+<!--style>
 body {
   margin: 5em;
 }
@@ -11,10 +11,14 @@ body {
 code {
   color: #b44;
 }
-</style>
+</style-->
 
 <script type="text/javascript" src="lib/reveal.js-3.5.0/plugin/highlight/highlight.js"></script>
 <script>hljs.initHightlightingOnLoad();</script>
+
+# 講義資料等
+
+- 9月26日 --- [講義資料](https://github.com/is-prg1b/lecture/raw/master/slide/day01.pdf) / [サンプルコード](https://github.com/is-prg1b/lx01) / **次回小テスト**
 
 # 講義内容についての質問など
 
@@ -37,50 +41,14 @@ code {
 
     - 病気のため休学することになったので特別な配慮をして欲しい
 
-# 講義資料とサンプルコード
-
-講義資料
-: - [day01](https://github.com/is-prg1b/lecture/raw/master/slides/day01.pdf) <!--
-    - [day02](https://github.com/is-prg1b/lecture/raw/master/docs/day02.pdf)
-    - [day03](https://github.com/is-prg1b/lecture/raw/master/docs/day03.pdf)
-    - [day04](https://github.com/is-prg1b/lecture/raw/master/docs/day04.pdf)
-    - [day05](https://github.com/is-prg1b/lecture/raw/master/docs/day05.pdf)
-    - [day06](https://github.com/is-prg1b/lecture/raw/master/docs/day06.pdf)
-    - [day07](https://github.com/is-prg1b/lecture/raw/master/docs/day07.pdf)
-    - [day08](https://github.com/is-prg1b/lecture/raw/master/docs/day08.pdf)
-    - [day09](https://github.com/is-prg1b/lecture/raw/master/docs/day09.pdf)
-    - [day10](https://github.com/is-prg1b/lecture/raw/master/docs/day10.pdf)
-    - [day11](https://github.com/is-prg1b/lecture/raw/master/docs/day11.pdf)
-    - [day12](https://github.com/is-prg1b/lecture/raw/master/docs/day12.pdf)
-    - [day13](https://github.com/is-prg1b/lecture/raw/master/docs/day13.pdf)
-    - [day14](https://github.com/is-prg1b/lecture/raw/master/docs/day14.pdf) -->
-
-サンプルコード
-: 講義の進捗ごとにリポジトリを用意します．
-
-    - [day01](https://github.com/is-prg1b/lx01) <!-- /
-    - [day02](https://github.com/is-prg1b/lx02)
-    - [day03](https://github.com/is-prg1b/lx03)
-    - [day04](https://github.com/is-prg1b/lx04)
-    - [day05](https://github.com/is-prg1b/lx05)
-    - [day06](https://github.com/is-prg1b/lx06)
-    - [day07](https://github.com/is-prg1b/lx07)
-    - [day08](https://github.com/is-prg1b/lx08)
-    - [day09](https://github.com/is-prg1b/lx09)
-    - [day10](https://github.com/is-prg1b/lx10)
-    - [day11](https://github.com/is-prg1b/lx11)
-    - [day12](https://github.com/is-prg1b/lx12)
-    - [day13](https://github.com/is-prg1b/lx13)
-    - [day14](https://github.com/is-prg1b/lx14) -->
-
 # Gitリポジトリの初期化
 
 以下のような要領で`git`コマンドを実行するとGitHub上のリポジトリを複製できます．
 
-```bash
+~~~ {.bash}
 git clone git@github.com:is-prg1b/lecture
 git clone git@github.com:is-prg1b/lx01
-```
+~~~
 
 GitHubのデータが更新された場合は，適宜 `git pull` して下さい．最新版に更新できます．
 

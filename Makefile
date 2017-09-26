@@ -24,7 +24,7 @@ clean:
 html: server docs/index.html $(HTML)
 
 docs/index.html: slide/index.md
-	pandoc --to html --standalone --output $@ $^
+	pandoc --smart --to html --standalone --output $@ $^
 
 HTML_DEV = docs/dev/kw.js docs/dev/phantom.js docs/dev/slide.yaml
 
@@ -43,7 +43,7 @@ docs/html/%.html: $(HTML_DEV) slide/%.md
 	  --output=$(html1) \
  	  -V revealjs-url=../lib/reveal.js-3.5.0 \
  	  -V theme=serif \
-	  --css=../lib/kw.css \
+	  --css=../dev/kw.css \
 	  --smart
 
 	@# Then, PhantomJS is used to patch the temporary HTML and finishes it.
