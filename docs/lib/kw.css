@@ -33,12 +33,31 @@ td {
   padding: 3px;
 }
 
-pre.src {
-  background-color: #ffe0e0;
+code, pre {
+  font-family: "Source Code Pro";
 }
 
-pre.test {
+.src .sourceCode {
+  background-color: #ffe0e0;
+  padding: 1em;
+}
+
+.test .sourceCode {
   background-color: #e0e0ff;
+  padding: 1em;
+}
+
+pre.log {
+  background-color: #e0ffe0;
+  padding: 1em;
+}
+
+.log .info {
+  color: #0a0;
+}
+
+.log .error {
+  color: #a00;
 }
 
 underline {

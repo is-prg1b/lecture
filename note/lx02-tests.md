@@ -7,7 +7,7 @@ date: 2017年9月29日
 
 # lx02a
 
-~~~
+~~~ {.log}
 sbt:lx02a> test
 [info] LeapYearTest:
 [info] ScalaTest
@@ -22,7 +22,7 @@ sbt:lx02a> test
 
 # lx02b
 
-~~~
+~~~ {.log}
 sbt:lx02a> project lx02b
 [info] Set current project to lx02b (in build file:/Users/wakita/Dropbox/projects/prg/lecture/)
 sbt:lx02b> test
@@ -39,7 +39,7 @@ sbt:lx02b> test
 
 # lx02c
 
-~~~
+~~~ {.log}
 sbt:lx02b> project lx02c
 [info] Set current project to lx02c (in build file:/Users/wakita/Dropbox/projects/prg/lecture/)
 sbt:lx02c> test
@@ -58,7 +58,7 @@ sbt:lx02c> test
 
 # lx02d
 
-~~~
+~~~ {.log}
 sbt:lx02d> test
 [info] LeapYearTest:
 [info] 4で割り切れる年
@@ -81,7 +81,7 @@ sbt:lx02d> test
 
 # lx02e
 
-~~~
+~~~ {.log}
 sbt:lx02d> project lx02e
 [info] Set current project to lx02e (in build file:/Users/wakita/Dropbox/projects/prg/lecture/)
 sbt:lx02e> test
@@ -112,7 +112,7 @@ sbt:lx02e> test
 
 # lx02f
 
-~~~
+~~~ {.log}
 sbt:lx02e> project lx02f
 [info] Set current project to lx02f (in build file:/Users/wakita/Dropbox/projects/prg/lecture/)
 sbt:lx02f> test
@@ -139,7 +139,7 @@ sbt:lx02f> test
 
 # lx02g
 
-~~~
+~~~ {.log}
 sbt:lx02f> project lx02g
 [info] Set current project to lx02g (in build file:/Users/wakita/Dropbox/projects/prg/lecture/)
 sbt:lx02g> test
@@ -172,7 +172,7 @@ sbt:lx02g> test
 
 # lx02h
 
-~~~
+~~~ {.log}
 sbt:lx02g> project lx02h
 [info] Set current project to lx02h (in build file:/Users/wakita/Dropbox/projects/prg/lecture/)
 sbt:lx02h> test
@@ -201,7 +201,7 @@ sbt:lx02h> test
 
 # lx02i
 
-~~~
+~~~ {.log}
 sbt:lx02h> project lx02i
 [info] Set current project to lx02i (in build file:/Users/wakita/Dropbox/projects/prg/lecture/)
 sbt:lx02i> test
@@ -223,7 +223,7 @@ sbt:lx02i> test
 
 # lx02j
 
-~~~
+~~~ {.log}
 sbt:lx02i> project lx02j
 [info] Set current project to lx02j (in build file:/Users/wakita/Dropbox/projects/prg/lecture/)
 sbt:lx02j> test
@@ -252,7 +252,7 @@ sbt:lx02j> test
 
 # lx02k
 
-~~~
+~~~ {.log}
 sbt:lx02j> project lx02k
 [info] Set current project to lx02k (in build file:/Users/wakita/Dropbox/projects/prg/lecture/)
 sbt:lx02k> test
