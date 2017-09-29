@@ -1,4 +1,7 @@
+/quiz
+/docs/quiz/*
 quiz
+!/docs/quiz/quiz01*
 
 /.history
 /docs/tmp

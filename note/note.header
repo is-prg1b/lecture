@@ -1,2 +1,4 @@
+<script type="text/javascript" src="/lecture/lib/reveal.js-3.5.0/plugin/highlight/highlight.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 <link rel="stylesheet" type="text/css" href="/lecture/lib/reveal.js-3.5.0/css/theme/solarized.css">
 <link rel="stylesheet" type="text/css" href="/lecture/lib/kw.css">
