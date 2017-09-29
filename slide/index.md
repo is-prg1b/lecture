@@ -20,7 +20,7 @@ code {
 
 - 9月26日 --- [講義資料](https://github.com/is-prg1b/lecture/raw/master/slide/day01.pdf) / [サンプルコード](https://github.com/is-prg1b/lx01) / **次回小テスト**
 
-- 9月29日 --- [講義資料](/is-prg1b/html/lx02-leapyear.html)
+- 9月29日 --- [講義資料](/is-prg1b/lecture/html/lx02-leapyear.html)
 
 # 講義内容についての質問など
 
