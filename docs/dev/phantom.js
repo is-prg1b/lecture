@@ -4,10 +4,10 @@ const fs = require('fs');
 const page = require('webpage').create();
 const system = require('system');
 
-const base_url = 'http://localhost:8082/';
-const document_url = base_url + 'tmp/' + system.args[1] + '.html';
-const jquery_url = base_url + 'dev/jquery-3.2.1.min.js';
-const script_url = base_url + 'dev/kw.js';
+const base_url = 'http://localhost:8080';
+const document_url = base_url + '/lecture/tmp/' + system.args[1] + '.html';
+const jquery_url = base_url + '/lecture/dev/jquery-3.2.1.min.js';
+const script_url = base_url + '/lecture/dev/kw.js';
 const html = system.args[2];
 
 console.log(document_url, script_url, html);

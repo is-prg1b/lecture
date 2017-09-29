@@ -1,0 +1,387 @@
+<!DOCTYPE html><html class=" js no-mobile desktop no-ie safari safari538 lecture-section tmp-section w-400 gt-240 gt-320 lt-480 lt-640 lt-768 lt-800 lt-1024 lt-1280 lt-1440 lt-1680 lt-1920 no-portrait landscape gradient rgba opacity textshadow multiplebgs boxshadow borderimage borderradius cssreflections csstransforms csstransitions touch no-retina no-fontface domloaded" id="lx02-leapyear-page"><head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Ken Wakita (https://is-prg1b.github.io/lecture/)">
+  <meta name="dcterms.date" content="2017-09-29">
+  <title>lx02: TDD (leapyear)</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="/lecture/lib/reveal.js-3.5.0/css/reveal.css">
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="/lecture/lib/reveal.js-3.5.0/css/theme/serif.css" id="theme">
+  <link rel="stylesheet" href="/lecture/lib/kw.css">
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? '/lecture/lib/reveal.js-3.5.0/css/print/pdf.css' : '/lecture/lib/reveal.js-3.5.0/css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script><link rel="stylesheet" type="text/css" href="/lecture/lib/reveal.js-3.5.0/css/print/paper.css">
+  <!--[if lt IE 9]>
+  <script src="/lecture/lib/reveal.js-3.5.0/lib/js/html5shiv.js"></script>
+  <![endif]--><script type="text/javascript" src="/lecture/lib/reveal.js-3.5.0/plugin/zoom-js/zoom.js"></script><script type="text/javascript" src="/lecture/lib/reveal.js-3.5.0/plugin/notes/notes.js"></script>
+</head>
+<body style="-webkit-transition: -webkit-transform 0.8s ease; transition: -webkit-transform 0.8s ease;">
+  <div class="reveal slide center ready" role="application" data-transition-speed="default" data-background-transition="fade">
+    <div class="slides" style="width: 960px; height: 700px; left: 50%; top: 50%; bottom: auto; right: auto; -webkit-transform: translate(-50%, -50%) scale(0.4);">
+
+<section style="top: 200px; display: block;" class="present">
+  <h1 class="title">lx02: TDD (leapyear)</h1>
+  <p class="author">Ken Wakita (<a href="https://is-prg1b.github.io/lecture/" class="uri">https://is-prg1b.github.io/lecture/</a>)</p>
+  <p class="date">Sep. 29, 2017</p>
+</section>
+
+<section style="top: 0px; display: block;" hidden="" aria-hidden="true" class="stack future"><section id="テスト駆動開発" class="titleslide slide level1" style="top: 272px; display: block;"><h1>テスト駆動開発</h1></section><section id="テスト駆動開発の実際" class="slide level2 future" aria-hidden="true" style="top: 20px; display: block;">
+<h2>テスト駆動開発の実際</h2>
+<p>ひとまず，<em>やる気のないコード</em>を作成</p>
+<p>テストを実施するコードを作成（完璧でなくてよい）</p>
+<p>以下を繰り返し</p>
+<ul>
+<li><p>テストを実行</p></li>
+<li><p>テストに合格するようにプログラムを修正</p></li>
+<li><p>想定外のバグを発見 → バグを再現するテストを追加</p></li>
+</ul>
+</section><section id="例閏年の計算" class="slide level2 future" aria-hidden="true" style="top: 350px; display: none;">
+<h2>例：閏年の計算</h2>
+<p>目標：西暦(Y)が与えられたときに，その年が閏年か否かを答えるメソッドleapYearを作成しなさい</p>
+</section><section id="日本における閏年の根拠法" class="slide level2 future" aria-hidden="true" style="top: 350px; display: none;">
+<h2>日本における閏年の根拠法</h2>
+<p>明治三十一年勅令第九十号（閏年ニ関スル件・明治三十一年五月十一日勅令第九十号</p>
+<ul>
+<li><p>神武天皇即位紀元年数ノ四ヲ以テ整除シ得ヘキ年ヲ閏年トス</p></li>
+<li><p>但シ紀元年数ヨリ六百六十ヲ減シテ百ヲ以テ整除シ得ヘキモノノ中更ニ四ヲ以テ商ヲ整除シ得サル年ハ平年トス</p></li>
+</ul>
+</section><section id="超訳明治三十一年勅令第九十号" class="slide level2 future" aria-hidden="true" style="top: 350px; display: none;">
+<h2>（超訳）明治三十一年勅令第九十号</h2>
+<ul>
+<li><p>神武天皇が即位なさった年を紀元とする年数<span class="footnote">（これが紀元年数）</span>が4で割り切れるものを閏年とする</p></li>
+<li><p>ただし、紀元年数から660を減じたもの<span class="footnote">（神武天皇の即位の年は西暦-660年とされている）</span>が100で割り切れるもののうち、さらにその商が4で割り切れないもの<span class="footnote">(つまり、西暦換算が400で割り切れないもの）</span>は平年とする。</p></li>
+</ul>
+</section><section id="早い話が" class="slide level2 future" aria-hidden="true" style="top: 350px; display: none;">
+<h2>早い話が、</h2>
+<p>グレゴリオ暦では、次の規則に従って400年間に（100回ではなく）97回の閏年を設ける。</p>
+<ul>
+<li><p>西暦年が4で割り切れる年は閏年</p></li>
+<li><p>ただし、西暦年が100で割り切れる年は平年</p></li>
+<li><p>ただし、西暦年が400で割り切れる年は閏年</p></li>
+</ul>
+</section><section id="lx02a" class="slide level2 future" aria-hidden="true" style="top: 350px; display: none;">
+<h2>lx02a</h2>
+<p>空のコードとテストのファイルを用意する．</p>
+<div class="sourceCode"><pre class="sourceCode ocaml src"><code class="sourceCode ocaml">// src/leapyear.scala
+
+<span class="kw">object</span> LeapYear {
+}</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode ocaml test"><code class="sourceCode ocaml">// test/leapyear.scala
+
+import org.scalatest._
+import LeapYear._
+
+<span class="kw">class</span> LeapYearTest extends FlatSpec {
+}</code></pre></div>
+</section><section id="lx02b" class="slide level2 future" aria-hidden="true" style="top: 350px; display: none;">
+<h2>lx02b</h2>
+<p>やる気のないコードとして、これ以上はないほど愚かなコードを作る．</p>
+<p>型だけは仕様に合わせる．</p>
+<div class="sourceCode"><pre class="sourceCode ocaml src"><code class="sourceCode ocaml"><span class="kw">object</span> LeapYear {
+  def leapyear(y: Int) : Boolean = {
+    <span class="kw">true</span>
+  }
+}</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode ocaml test"><code class="sourceCode ocaml">import org.scalatest._
+import LeapYear._
+
+<span class="kw">class</span> LeapYearTest extends FlatSpec {
+}</code></pre></div>
+</section><section id="lx02b-sbtでテストを開始" class="slide level2 future" aria-hidden="true" style="top: 350px; display: none;">
+<h2>lx02b: sbtでテストを開始</h2>
+<p>まだ，テストが空だから，なにも起きない</p>
+<p><a href="/lecture/note/lx02-tests.html#lx02b">テスト結果へ</a></p>
+</section><section id="lx02c" class="slide level2 future" aria-hidden="true" style="top: 350px; display: none;">
+<h2>lx02c</h2>
+<p>テストのためのコードを作成</p>
+<p>完璧でなくてよい</p>
+<div class="sourceCode"><pre class="sourceCode ocaml src"><code class="sourceCode ocaml"><span class="kw">object</span> LeapYear {
+  def leapyear(y: Int) : Boolean = {
+    <span class="kw">true</span>
+  }
+}</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode ocaml test"><code class="sourceCode ocaml">import org.scalatest._
+import LeapYear._
+
+<span class="kw">class</span> LeapYearTest extends FlatSpec {
+  <span class="st">"4で割り切れる年"</span> should <span class="st">"閏年である"</span> <span class="kw">in</span> {
+    <span class="kw">assert</span>(leapyear(<span class="dv">2012</span>) == (<span class="kw">true</span>))
+    <span class="kw">assert</span>(leapyear(<span class="dv">2016</span>) == (<span class="kw">true</span>))
+  }
+}</code></pre></div>
+</section><section id="lx02c-自動テストの結果は" class="slide level2 future" aria-hidden="true" style="top: 350px; display: none;">
+<h2>lx02c: 自動テストの結果は？</h2>
+<p><a href="/lecture/note/lx02-tests.html#lx02c">テスト結果へ</a></p>
+<p>みごとにテストをパス．完璧！</p>
+</section><section id="lx02d-と喜んでいると天の声" class="slide level2 future" aria-hidden="true" style="top: 350px; display: none;">
+<h2>lx02d: と，喜んでいると，天の声</h2>
+<ul>
+<li><p>曰く「4で割り切れない年は平年」</p>
+<ul>
+<li>「やべ，テストが甘い！追加しなくちゃ」</li>
+</ul></li>
+</ul>
+</section><section id="lx02d" class="slide level2 future" aria-hidden="true" style="top: 350px; display: none;">
+<h2>lx02d</h2>
+<p>4で割り切れない年のテストを追加</p>
+<div class="sourceCode"><pre class="sourceCode ocaml test"><code class="sourceCode ocaml">import org.scalatest._
+import LeapYear._
+
+<span class="kw">class</span> LeapYearTest extends FlatSpec {
+  <span class="st">"4で割り切れる年"</span> should <span class="st">"閏年である"</span> <span class="kw">in</span> {
+    <span class="kw">assert</span>(leapyear(<span class="dv">2012</span>) == (<span class="kw">true</span>))
+    <span class="kw">assert</span>(leapyear(<span class="dv">2016</span>) == (<span class="kw">true</span>))
+  }
+
+  <span class="st">"4で割り切れない年"</span> should <span class="st">"閏年でない"</span> <span class="kw">in</span> {
+    <span class="kw">assert</span>(leapyear(<span class="dv">2014</span>) == (<span class="kw">false</span>))
+    <span class="kw">assert</span>(leapyear(<span class="dv">2015</span>) == (<span class="kw">false</span>))
+    <span class="kw">assert</span>(leapyear(<span class="dv">2017</span>) == (<span class="kw">false</span>))
+  }
+}</code></pre></div>
+</section><section id="lx02d-テストの結果-12" class="slide level2 future" aria-hidden="true" style="top: 350px; display: none;">
+<h2>lx02d: テストの結果 (1/2)</h2>
+<ul>
+<li><p><code>LeapYearTest</code> で問題発見</p></li>
+<li><p><code>leapyear.scala</code> の13行目を見てごらん．<code>false</code> が欲しいのに，<code>true</code>じゃん．</p></li>
+</ul>
+<p><a href="/lecture/note/lx02-tests.html#lx02d">テスト結果へ</a></p>
+</section><section id="lx02d-テストの結果-22" class="slide level2 future" aria-hidden="true" style="top: 350px; display: none;">
+<h2>lx02d: テストの結果 (2/2)</h2>
+<p><code>LeapYearTest</code> で問題発見</p>
+<ul>
+<li><p>一箇所コケたよ</p></li>
+<li><p>コケたテストは <code>LeapYearTest</code> 残念</p></li>
+</ul>
+<p><a href="/lecture/note/lx02-tests.html#lx02d">テスト結果へ</a></p>
+</section><section id="lx02d-テストの13行目" class="slide level2 future" aria-hidden="true" style="top: 350px; display: none;">
+<h2>lx02d: テストの13行目</h2>
+<p>そこでテストコードの13行目を見る もちろんテストの内容は正しい．</p>
+<div class="sourceCode"><pre class="sourceCode ocaml test"><code class="sourceCode ocaml">import org.scalatest._
+import LeapYear._
+
+<span class="kw">class</span> LeapYearTest extends FlatSpec {
+  <span class="st">"4で割り切れる年"</span> should <span class="st">"閏年である"</span> <span class="kw">in</span> {
+    <span class="kw">assert</span>(leapyear(<span class="dv">2012</span>) == (<span class="kw">true</span>))
+    <span class="kw">assert</span>(leapyear(<span class="dv">2016</span>) == (<span class="kw">true</span>))
+  }
+
+  <span class="st">"4で割り切れない年"</span> should <span class="st">"閏年でない"</span> <span class="kw">in</span> {
+    <span class="kw">assert</span>(leapyear(<span class="dv">2014</span>) == (<span class="kw">false</span>))
+    <span class="kw">assert</span>(leapyear(<span class="dv">2015</span>) == (<span class="kw">false</span>))
+    <span class="kw">assert</span>(leapyear(<span class="dv">2017</span>) == (<span class="kw">false</span>))
+  }
+}</code></pre></div>
+</section><section id="lx02e-ソースの修正" class="slide level2 future" aria-hidden="true" style="top: 350px; display: none;">
+<h2>lx02e: ソースの修正</h2>
+<p>（テストは正しいので）プログラムの問題を（探すまでもないが）探し</p>
+<div class="sourceCode"><pre class="sourceCode ocaml src"><code class="sourceCode ocaml"><span class="kw">object</span> LeapYear {
+  def leapyear(y: Int) : Booelan = {
+    <span class="kw">false</span>
+  }
+}</code></pre></div>
+<p>（敢て）小ずる賢い変更を施してみよう</p>
+</section><section id="lx02e-追加したテストはok" class="slide level2 future" aria-hidden="true" style="top: 350px; display: none;">
+<h2>lx02e: 追加したテストはok</h2>
+<p>でも，さっきは成功していた8行目が．．．</p>
+<p><a href="/lecture/note/lx02-tests.html#lx02e">テスト結果へ</a></p>
+</section><section id="lx02f-真面目に対応するか" class="slide level2 future" aria-hidden="true" style="top: 350px; display: none;">
+<h2>lx02f: 真面目に対応するか</h2>
+<p>4で割り切れば閏年なんでしょ？</p>
+<div class="sourceCode"><pre class="sourceCode ocaml src"><code class="sourceCode ocaml"><span class="kw">object</span> LeapYear {
+  def leapyear(y: Int) : Boolean = {
+    y % <span class="dv">4</span> == <span class="dv">0</span>
+  }
+}</code></pre></div>
+</section><section id="lx02f-三度テストを見ると" class="slide level2 future" aria-hidden="true" style="top: 350px; display: none;">
+<h2>lx02f: 三度，テストを見ると</h2>
+<p>すべてパス！やったー！</p>
+<p><a href="/lecture/note/lx02-tests.html#lx02f">テスト結果へ</a></p>
+</section><section id="lx02g-テストの追加" class="slide level2 future" aria-hidden="true" style="top: 350px; display: none;">
+<h2>lx02g: テストの追加</h2>
+<p>調子にのってテストを追加</p>
+<div class="sourceCode"><pre class="sourceCode ocaml test"><code class="sourceCode ocaml">import org.scalatest._
+import LeapYear._
+
+<span class="kw">class</span> LeapYearTest extends FlatSpec {
+  <span class="st">"4で割り切れる年"</span> should <span class="st">"閏年である"</span> <span class="kw">in</span> {
+    <span class="kw">assert</span>(leapyear(<span class="dv">2012</span>) == (<span class="kw">true</span>))
+    <span class="kw">assert</span>(leapyear(<span class="dv">2016</span>) == (<span class="kw">true</span>))
+  }
+
+  // 中略
+
+  <span class="st">"100で割り切れる年"</span> should <span class="st">"閏年でない"</span> <span class="kw">in</span> {
+    <span class="kw">assert</span>(leapyear(<span class="dv">2012</span>) == (<span class="kw">false</span>))
+    <span class="kw">assert</span>(leapyear(<span class="dv">2016</span>) == (<span class="kw">false</span>))
+  }
+}</code></pre></div>
+</section><section id="lx02g-今度のテストは" class="slide level2 future" aria-hidden="true" style="top: 350px; display: none;">
+<h2>lx02g: 今度のテストは？</h2>
+<p>もちろん，こけてます．</p>
+<p><a href="/lecture/note/lx02-tests.html#lx02g">テスト結果へ</a></p>
+</section><section id="lx02h-テストを通るように修正" class="slide level2 future" aria-hidden="true" style="top: 350px; display: none;">
+<h2>lx02h: テストを通るように修正</h2>
+<div class="sourceCode"><pre class="sourceCode ocaml src"><code class="sourceCode ocaml"><span class="kw">object</span> LeapYear {
+  def leapyear(y: Int) : Boolean = {
+    !(y % <span class="dv">100</span> == <span class="dv">0</span>) &amp;&amp; y % <span class="dv">4</span> == <span class="dv">0</span>
+  }
+}</code></pre></div>
+</section><section id="lx02h-これでどうだ" class="slide level2 future" aria-hidden="true" style="top: 350px; display: none;">
+<h2>lx02h: これでどうだ？</h2>
+<p><a href="/lecture/note/lx02-tests.html#lx02g">テスト結果へ</a></p>
+</section><section id="lx02i-ふたたび天の声" class="slide level2 future" aria-hidden="true" style="top: 350px; display: none;">
+<h2>lx02i: ふたたび天の声</h2>
+<p>「そもそも，法律施行前の閏年というものは．．．」</p>
+<ul>
+<li><p>法律の施行は明治32年1月1日 (西暦 1899.1.1) ．それ以前については意味がない．</p>
+<ul>
+<li><p>「意味がない」をどうやって表す？</p>
+<ol type="1">
+<li><p>エラーを出力 → 例外処理</p></li>
+<li><p>「あるかなきか」を表すデータ型 (Option) を利用</p></li>
+</ol></li>
+</ul></li>
+</ul>
+</section><section id="lx02i-option-型" class="slide level2 future" aria-hidden="true" style="top: 350px; display: none;">
+<h2>lx02i: Option 型</h2>
+<pre><code>Option[A] ::= None | Some[A+]</code></pre>
+<ul>
+<li>ここでは返り値として「Boolean があるかなきか」なので <code>Option[Boolean]</code> を利用</li>
+</ul>
+<pre><code>Option[Boolean] ::= None | Some[Boolean+]</code></pre>
+<ul>
+<li><code>Option[Boolean]</code> な値は: <code>None</code> か <code>Some(true)</code> か <code>Some(false)</code></li>
+</ul>
+</section><section id="lx02i-テストの修正" class="slide level2 future" aria-hidden="true" style="top: 350px; display: none;">
+<h2>lx02i: テストの修正</h2>
+<div class="sourceCode"><pre class="sourceCode ocaml test"><code class="sourceCode ocaml"><span class="kw">class</span> LeapYearTest extends FlatSpec {
+  // 中略
+
+  def compare_option[A](value: Option[A], expected: Option[A]) = {
+    (value, expected) <span class="kw">match</span> {
+      case (<span class="dt">None</span>, <span class="dt">None</span>) =&gt; <span class="kw">true</span>
+      case (<span class="dt">Some</span>(v1), <span class="dt">Some</span>(v2)) =&gt; v1 == v2
+      case _ =&gt; <span class="kw">false</span>
+    }
+  }
+
+  <span class="st">"1899年前後"</span> should <span class="st">"法律の施行時期を反映"</span> <span class="kw">in</span> {
+    <span class="kw">assert</span>(leapyear(<span class="dv">1898</span>) == (<span class="dt">None</span>))
+    <span class="kw">assert</span>(leapyear(<span class="dv">1899</span>) != (<span class="dt">None</span>))
+  }
+}</code></pre></div>
+</section><section id="lx02i-テストするのだけど" class="slide level2 future" aria-hidden="true" style="top: 350px; display: none;">
+<h2>lx02i: テストするのだけど</h2>
+<p>当然，コケます．型エラーでテストのビルドに失敗．</p>
+<p>原因はテストコードとソースコードの型が一致しないこと．</p>
+<p><a href="/lecture/note/lx02-tests.html#lx02i">テスト結果へ</a></p>
+</section><section id="lx02j-ソースの型をテストにあわせて修正" class="slide level2 future" aria-hidden="true" style="top: 350px; display: none;">
+<h2>lx02j: ソースの型をテストにあわせて修正</h2>
+<div class="sourceCode"><pre class="sourceCode ocaml src"><code class="sourceCode ocaml"><span class="kw">object</span> LeapYear {
+  def leapyear(y: Int) : Option[Boolean] = {
+    <span class="dt">Some</span>(!(y % <span class="dv">100</span> == <span class="dv">0</span>) &amp;&amp; y % <span class="dv">4</span> == <span class="dv">0</span>)
+  }
+}</code></pre></div>
+</section><section id="lx02j-テスト" class="slide level2 future" aria-hidden="true" style="top: 350px; display: none;">
+<h2>lx02j: テスト！</h2>
+<p>今度はテストの失敗．まだ，ソースコードは法律の施行時期に対応していないからね．</p>
+<p><a href="/lecture/note/lx02-tests.html#lx02i">テスト結果へ</a></p>
+</section><section id="lx02k-法律の施行時期への対応" class="slide level2 future" aria-hidden="true" style="top: 350px; display: none;">
+<h2>lx02k: 法律の施行時期への対応</h2>
+<div class="sourceCode"><pre class="sourceCode ocaml src"><code class="sourceCode ocaml"><span class="kw">object</span> LeapYear {
+  def leapyear(y: Int) : Option[Boolean] = {
+    <span class="kw">if</span> (y &lt; <span class="dv">1899</span>) <span class="dt">None</span>
+    <span class="kw">else</span> <span class="dt">Some</span>(!(y % <span class="dv">100</span> == <span class="dv">0</span>) &amp;&amp; y % <span class="dv">4</span> == <span class="dv">0</span>)
+  }
+}</code></pre></div>
+</section><section id="lx02k-テスト" class="slide level2 future" aria-hidden="true" style="top: 350px; display: none;">
+<h2>lx02k: テスト</h2>
+<pre><code>[info] Tests: succeeded 4, failed 0, canceled 0, ignored 0, pending 0</code></pre>
+<p><a href="/lecture/note/lx02-tests.html#lx02k">テスト結果へ</a></p>
+</section><section id="lx02-いやいやまだ駄目でしょう" class="slide level2 future" aria-hidden="true" style="top: 350px; display: none;">
+<h2>lx02?: いやいや，まだ駄目でしょう</h2>
+<p>天の声「ただし西暦年が400で割り切れる年は閏年」</p>
+<ul>
+<li><p>ということは，2000年とか1600年は閏年？</p></li>
+<li><p>施行時期のこともあるから1600年は．．．</p></li>
+</ul>
+</section><section id="lx02-おさらい残りは任せた" class="slide level2 future" aria-hidden="true" style="top: 350px; display: none;">
+<h2>lx02?: おさらい＆残りは任せた</h2>
+<p>TDD手法を用いて，講義資料のステップ１からステップ４までを順次おさらいしなさい．</p>
+<p>さらにTDDを自分で実践し，閏年のプログラムを完成しなさい．最終的には講義資料の「早い話が、」のページに記載された仕様を満すこと．</p>
+</section></section>
+    </div>
+  <div class="backgrounds"><div class="slide-background present" data-loaded="true" style="display: block;"></div><div class="slide-background stack future" data-loaded="true" style="display: block;"><div class="slide-background titleslide slide level1 present" data-loaded="true" style="display: block;"></div><div class="slide-background slide level2 future" data-loaded="true" style="display: block;"></div><div class="slide-background slide level2 future" style="display: none;"></div><div class="slide-background slide level2 future" style="display: none;"></div><div class="slide-background slide level2 future" style="display: none;"></div><div class="slide-background slide level2 future" style="display: none;"></div><div class="slide-background slide level2 future" style="display: none;"></div><div class="slide-background slide level2 future" style="display: none;"></div><div class="slide-background slide level2 future" style="display: none;"></div><div class="slide-background slide level2 future" style="display: none;"></div><div class="slide-background slide level2 future" style="display: none;"></div><div class="slide-background slide level2 future" style="display: none;"></div><div class="slide-background slide level2 future" style="display: none;"></div><div class="slide-background slide level2 future" style="display: none;"></div><div class="slide-background slide level2 future" style="display: none;"></div><div class="slide-background slide level2 future" style="display: none;"></div><div class="slide-background slide level2 future" style="display: none;"></div><div class="slide-background slide level2 future" style="display: none;"></div><div class="slide-background slide level2 future" style="display: none;"></div><div class="slide-background slide level2 future" style="display: none;"></div><div class="slide-background slide level2 future" style="display: none;"></div><div class="slide-background slide level2 future" style="display: none;"></div><div class="slide-background slide level2 future" style="display: none;"></div><div class="slide-background slide level2 future" style="display: none;"></div><div class="slide-background slide level2 future" style="display: none;"></div><div class="slide-background slide level2 future" style="display: none;"></div><div class="slide-background slide level2 future" style="display: none;"></div><div class="slide-background slide level2 future" style="display: none;"></div><div class="slide-background slide level2 future" style="display: none;"></div><div class="slide-background slide level2 future" style="display: none;"></div><div class="slide-background slide level2 future" style="display: none;"></div><div class="slide-background slide level2 future" style="display: none;"></div><div class="slide-background slide level2 future" style="display: none;"></div><div class="slide-background slide level2 future" style="display: none;"></div></div></div><div class="progress" style="display: block;"><span style="width: 0px;"></span></div><aside class="controls" style="display: block;"><button class="navigate-left" aria-label="previous slide" disabled="disabled"></button><button class="navigate-right enabled" aria-label="next slide"></button><button class="navigate-up" aria-label="above slide" disabled="disabled"></button><button class="navigate-down" aria-label="below slide" disabled="disabled"></button></aside><div class="slide-number" style="display: block;"><span class="slide-number-a">1</span></div><div class="speaker-notes" data-prevent-swipe="" tabindex="0"></div><div class="pause-overlay"></div><div id="aria-status-div" aria-live="polite" aria-atomic="true" style="position: absolute; height: 1px; width: 1px; overflow: hidden; clip: rect(1px 1px 1px 1px);">
+  lx02: TDD (leapyear)
+  Ken Wakita (https://is-prg1b.github.io/lecture/)
+  Sep. 29, 2017
+</div></div>
+
+  <script src="/lecture/lib/reveal.js-3.5.0/lib/js/head.min.js"></script>
+  <script src="/lecture/lib/reveal.js-3.5.0/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display the page number of the current slide
+        slideNumber: true,
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: '/lecture/lib/reveal.js-3.5.0/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: '/lecture/lib/reveal.js-3.5.0/plugin/zoom-js/zoom.js', async: true },
+              { src: '/lecture/lib/reveal.js-3.5.0/plugin/notes/notes.js', async: true }
+        ]
+      });
+    </script>
+    
+
+</body></html>

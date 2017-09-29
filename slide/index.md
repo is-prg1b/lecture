@@ -20,6 +20,8 @@ code {
 
 - 9月26日 --- [講義資料](https://github.com/is-prg1b/lecture/raw/master/slide/day01.pdf) / [サンプルコード](https://github.com/is-prg1b/lx01) / **次回小テスト**
 
+- 9月29日 --- [講義資料](/is-prg1b/slide/lx02-leapyear.html)
+
 # 講義内容についての質問など
 
 [質問，疑問等の受け付け先](https://github.com/is-prg1b/lecture/issues/new)．受け付けた質問は教員，TA，履修生で共有されます．これ以外の人々には公開されません．

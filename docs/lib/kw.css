@@ -1,5 +1,11 @@
+a, a:link, a:hover, a:active {
+  font-weight: 900;
+  color: #44f;
+  background-color: #fff;
+}
+
 dl dd {
-  margin-left: 4ex;
+  margin-left: 2ex;
 }
 
 table {
@@ -22,6 +28,16 @@ td {
   padding: 3px;
 }
 
+pre.src {
+  //box-shadow: 1px 1px 10px #600;
+  background-color: #ffe0e0;
+}
+
+pre.test {
+  //box-shadow: 1px 1px 10px #006;
+  background-color: #e0e0ff;
+}
+
 underline {
   text-decoration: underline;
 }
@@ -35,3 +51,16 @@ underline {
 .reveal h2 { font-size: 2.00em; }
 .reveal h3 { font-size: 1.50em; }
 .reveal h4 { font-size: 1.00em; }
+
+span.footnote {
+  display: none;
+}
+
+p:hover span.footnote {
+  display: inline;
+  color: #080;
+}
+
+.quiz li {
+  padding-bottom: 10ex;
+}

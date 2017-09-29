@@ -4,9 +4,7 @@
 .DEFAULT: html
 all: html note quiz
 
-BASE     := localhost:8082
-
-SLIDES   := $(basename $(notdir $(wildcard slide/day*.md)))
+SLIDES   := $(basename $(notdir $(wildcard slide/lx*.md)))
 HTML_TMP := $(addprefix docs/tmp/,  $(addsuffix .html, $(SLIDES)))
 HTML     := $(addprefix docs/html/, $(addsuffix .html, $(SLIDES)))
 PDF      := $(addprefix docs/pdf/,  $(addsuffix .pdf,  $(SLIDES)))
@@ -37,13 +35,15 @@ docs/html/%.html: $(HTML_DEV) slide/%.md
 	@# Firstly, Pandoc generates a temporary HTML file:
 	@# slide/*.md -> tmp/*.html
 	@echo "pandoc:    $(md) => $(html1)"
-	@pandoc docs/dev/slide.yaml $(md) \
+	@pandoc lib/slide.yaml $(md) \
 	  --to=revealjs --slide-level=2 \
 	  --standalone \
 	  --output=$(html1) \
- 	  -V revealjs-url=../lib/reveal.js-3.5.0 \
+ 	  -V revealjs-url=/lecture/lib/reveal.js-3.5.0 \
  	  -V theme=serif \
-	  --css=../dev/kw.css \
+	  -V slideNumber=true \
+	  --css=/lecture/lib/kw.css \
+	  --mathjax \
 	  --smart
 
 	@# Then, PhantomJS is used to patch the temporary HTML and finishes it.
@@ -76,7 +76,7 @@ docs/quiz/%.html: quiz/%.md
 	  --smart
 
 server:
-	@wget --quiet --spider "http://$(BASE)/" || (cd docs; php -S $(BASE) &)
+	@wget --quiet --spider "http://localhost:8080/" || (cd $(HOME)/Sites; php -S localhost:8080 &)
 
 shutdown:
 	@killall php
