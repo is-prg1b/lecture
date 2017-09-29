@@ -37,6 +37,8 @@ lazy val common = Seq(
   version := "0.1.0"
 )
 
+lazy val lx01 = project.settings(common)
+
 val lx02 = "lx02/lx02"
 lazy val lx02a = (project in file(lx02 + "a")).settings(common)
 lazy val lx02b = (project in file(lx02 + "b")).settings(common)
