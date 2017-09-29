@@ -1,7 +1,12 @@
-a, a:link, a:hover, a:active {
+body {
+  padding-left: 6ex;
+  padding-right: 4ex;
+}
+
+a:-webkit-any-link {
   font-weight: 900;
-  color: #44f;
-  background-color: #fff;
+  color: #d66;
+  text-decoration: none;
 }
 
 dl dd {
@@ -29,12 +34,10 @@ td {
 }
 
 pre.src {
-  //box-shadow: 1px 1px 10px #600;
   background-color: #ffe0e0;
 }
 
 pre.test {
-  //box-shadow: 1px 1px 10px #006;
   background-color: #e0e0ff;
 }
 

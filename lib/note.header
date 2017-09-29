@@ -1,0 +1,2 @@
+<script type="text/javascript" src="/lecture/lib/reveal.js-3.5.0/plugin/highlight/highlight.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>

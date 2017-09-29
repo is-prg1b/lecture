@@ -1,26 +1,12 @@
 ---
 title: プログラミング第一
-css: ["lib/reveal.js-3.5.0/css/theme/solarized.css", "dev/kw.css"]
 ---
-
-<!--style>
-body {
-  margin: 5em;
-}
-
-code {
-  color: #b44;
-}
-</style-->
-
-<script type="text/javascript" src="lib/reveal.js-3.5.0/plugin/highlight/highlight.js"></script>
-<script>hljs.initHightlightingOnLoad();</script>
 
 # 講義資料等
 
 - 9月26日 --- [講義資料](https://github.com/is-prg1b/lecture/raw/master/slide/day01.pdf) / [サンプルコード](https://github.com/is-prg1b/lx01) / **次回小テスト**
 
-- 9月29日 --- [講義資料](/is-prg1b/lecture/html/lx02-leapyear.html)
+- 9月29日 --- [講義資料](/lecture/slide/lx02.html) / [サンプルコード](https://github.com/is-prg1b/lecture/) (`lx02a` - `lx02k` projects)
 
 # 講義内容についての質問など
 

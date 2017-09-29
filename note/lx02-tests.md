@@ -3,6 +3,8 @@ title: lx02 のテスト実行結果
 date: 2017年9月29日
 ---
 
+<note>
+
 # lx02a
 
 ~~~
@@ -278,3 +280,5 @@ sbt:lx02k> test
 [info] Passed: Total 4, Failed 0, Errors 0, Passed 4
 [success] Total time: 2 s, completed Sep 29, 2017 12:24:24 PM
 ~~~
+
+</note>

@@ -11,41 +11,41 @@
 div.sourceCode { overflow-x: auto; }
 table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
   margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; background-color: #2a211c; color: #bdae9d; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; background-color: #2a211c; color: #bdae9d; border-right: 1px solid #bdae9d; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
 td.sourceCode { padding-left: 5px; }
-pre, code { color: #bdae9d; background-color: #2a211c; }
-code > span.kw { color: #43a8ed; font-weight: bold; } /* Keyword */
-code > span.dt { text-decoration: underline; } /* DataType */
-code > span.dv { color: #44aa43; } /* DecVal */
-code > span.bn { color: #44aa43; } /* BaseN */
-code > span.fl { color: #44aa43; } /* Float */
-code > span.ch { color: #049b0a; } /* Char */
-code > span.st { color: #049b0a; } /* String */
-code > span.co { color: #0066ff; font-style: italic; } /* Comment */
-code > span.al { color: #ffff00; } /* Alert */
-code > span.fu { color: #ff9358; font-weight: bold; } /* Function */
-code > span.er { color: #ffff00; font-weight: bold; } /* Error */
-code > span.wa { color: #ffff00; font-weight: bold; } /* Warning */
-code > span.cn { } /* Constant */
-code > span.sc { color: #049b0a; } /* SpecialChar */
-code > span.vs { color: #049b0a; } /* VerbatimString */
-code > span.ss { color: #049b0a; } /* SpecialString */
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
 code > span.im { } /* Import */
-code > span.va { } /* Variable */
-code > span.cf { color: #43a8ed; font-weight: bold; } /* ControlFlow */
-code > span.op { } /* Operator */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
 code > span.bu { } /* BuiltIn */
 code > span.ex { } /* Extension */
-code > span.pp { font-weight: bold; } /* Preprocessor */
-code > span.at { } /* Attribute */
-code > span.do { color: #0066ff; font-style: italic; } /* Documentation */
-code > span.an { color: #0066ff; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.co { color: #0066ff; font-weight: bold; font-style: italic; } /* Comment */
-code > span.in { color: #0066ff; font-weight: bold; font-style: italic; } /* Information */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
   </style>
-  <link ref="stylesheet" type="text/css" href="../lib/reveal.js-3.5.0/css/theme/solarized.css">
-  <link rel="stylesheet" type="text/css" href="../dev/kw.css">
+  <script type="text/javascript" src="/lecture/lib/reveal.js-3.5.0/plugin/highlight/highlight.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
 </head>
 <body>
 <div id="header">
@@ -53,6 +53,7 @@ code > span.in { color: #0066ff; font-weight: bold; font-style: italic; } /* Inf
 <h2 class="author">Ken Wakita (<a href="https://is-prg1b.github.io/lecture/" class="uri">https://is-prg1b.github.io/lecture/</a>)</h2>
 <h3 class="date">2017年9月26日</h3>
 </div>
+<note>
 <p>これまで，みなさんが作ってきたソフトウェアは概ねひとつのソースプログラムを実行する場合が多かったのではないでしょうか．でも，世の中の多くのソフトウェアは簡単なものでも複数のファイルやデータの組み合わせから構成されます．数千〜数万のファイルやデータから構成される複雑なソフトウェアも珍しくはありません．</p>
 <p>また，ひとつのソフトウェアが複数のモジュールやプログラムから構成される場合もあります．</p>
 <p>このように，複数のファイルやデータを組合せて，さまざまなプログラムを構成するときに，その組合せの手順書を記述したものが <code>Makefile</code> です．</p>
@@ -142,13 +143,14 @@ code > span.in { color: #0066ff; font-weight: bold; font-style: italic; } /* Inf
 <p>他人にソフトウェアを受け渡すときは，普通は必要最小限の構成としてプログラムのみを送り，コンパイル生成物を送るべきではない．このような場合，一旦 <code>make clean</code> するだけで，フォルダの内容をきれいに整えることができるので便利である．</p>
 <p><code>Makefile</code> はプログラムの実行のためのコマンドを記述する目的でもしばしば利用される．たとえば，23-25行目には，<code>scalac</code>の生成物である <code>Simple.class</code> を Java のインタプリタを用いて実行する方法を記述している．このような長いコマンドを正確に記憶することも，それを入力することも困難である．このような複雑な実行文も<code>Makefile</code>の規則として記述すれば単に<code>make run-j</code>を実行するだけで実行することができる．</p>
 <p>なお，本ウェブページの作成にあたっても，Markdown形式と呼ばれる簡素な記述から，煩瑣なHTML形式に<code>pandoc</code>コマンドを利用して変換しているのだが，この<a href="https://github.com/is-prg1b/lecture/blob/master/Makefile">思いの外に複雑な作業も<code>Makefile</code>を用いて管理</a>している．本格的は <code>Makefile</code> 記述の実際を学ぶ一助になれば幸いである．</p>
+</note>
 <div class="footnotes">
 <hr />
 <ol>
 <li id="fn1"><p>かつて，ソフトウェアのビルドに長大な時間がかかったときには，たとえ <code>make</code> を利用してもビルド作業に何十分もかかった．ビルドの合間に剣玉をしていたために当時のIBM東京基礎研の研究員はん剣玉上手だった．<a href="#fnref1">↩</a></p></li>
 </ol>
 </div>
-<script src="//use.edgefonts.net/source-code-pro.js"></script>
-<script src="../dev/jquery-3.2.1.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/lecture/lib/reveal.js-3.5.0/css/theme/solarized.css">
+<link rel="stylesheet" type="text/css" href="/lecture/lib/kw.css">
 </body>
 </html>
