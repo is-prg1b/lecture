@@ -11,7 +11,7 @@ val scalacheck = "org.scalacheck" %% "scalacheck" % "1.13.4" % "test"
 // 並行処理のための Akka Actor ライブラリ
 val akka_actor = "com.typesafe.akka" % "akka-actor_2.12" % "2.5.4"
 
-lazy val commonSettings = Seq(
+lazy val common = Seq(
   organization := "prg17.is.titech.ac.jp",
   version := "0.1.0-SNAPSHOT",
 
@@ -32,56 +32,20 @@ lazy val commonSettings = Seq(
   // コンパイル結果を非標準の場所に設定
   // この設定はコンパイルの副産物がDropbox等のクラウドストレージに保存されることを
   // 避けるためのものです。これによりクラウドストレージとの同期時間が短縮されます。
-  target := Path.userHome / "tmp" / "sbt" / "prg1b" / name.value
+  target := Path.userHome / "tmp" / "sbt" / "prg1b" / name.value,
+
+  version := "0.1.0"
 )
 
-lazy val root = (project in file("."))
-//.aggregate(lx02)
-
-lazy val lx02 = project
-  .settings(commonSettings)
-  .settings(name := "lx02", version := "0.1.0")
-
-lazy val lx02a = project
-  .settings(commonSettings)
-  .settings(name := "lx02a", version := "0.1.0")
-
-lazy val lx02b = project
-  .settings(commonSettings)
-  .settings(name := "lx02b", version := "0.1.0")
-
-lazy val lx02c = project
-  .settings(commonSettings)
-  .settings(name := "lx02c", version := "0.1.0")
-
-lazy val lx02d = project
-  .settings(commonSettings)
-  .settings(name := "lx02d", version := "0.1.0")
-
-lazy val lx02e = project
-  .settings(commonSettings)
-  .settings(name := "lx02e", version := "0.1.0")
-
-lazy val lx02f = project
-  .settings(commonSettings)
-  .settings(name := "lx02f", version := "0.1.0")
-
-lazy val lx02g = project
-  .settings(commonSettings)
-  .settings(name := "lx02g", version := "0.1.0")
-
-lazy val lx02h = project
-  .settings(commonSettings)
-  .settings(name := "lx02h", version := "0.1.0")
-
-lazy val lx02i = project
-  .settings(commonSettings)
-  .settings(name := "lx02i", version := "0.1.0")
-
-lazy val lx02j = project
-  .settings(commonSettings)
-  .settings(name := "lx02j", version := "0.1.0")
-
-lazy val lx02k = project
-  .settings(commonSettings)
-  .settings(name := "lx02k", version := "0.1.0")
+val lx02 = "lx02/lx02"
+lazy val lx02a = (project in file(lx02 + "a")).settings(common)
+lazy val lx02b = (project in file(lx02 + "b")).settings(common)
+lazy val lx02c = (project in file(lx02 + "c")).settings(common)
+lazy val lx02d = (project in file(lx02 + "d")).settings(common)
+lazy val lx02e = (project in file(lx02 + "e")).settings(common)
+lazy val lx02f = (project in file(lx02 + "f")).settings(common)
+lazy val lx02g = (project in file(lx02 + "g")).settings(common)
+lazy val lx02h = (project in file(lx02 + "h")).settings(common)
+lazy val lx02i = (project in file(lx02 + "i")).settings(common)
+lazy val lx02j = (project in file(lx02 + "j")).settings(common)
+lazy val lx02k = (project in file(lx02 + "k")).settings(common)
