@@ -35,29 +35,45 @@ td {
 
 code, pre {
   font-family: "Source Code Pro";
+  font-weight: bold;
+  color: #555;
 }
 
-.src .sourceCode {
-  background-color: #ffe0e0;
-  padding: 1em;
+/*
+pre {
+  background-color: #fff;
 }
+*/
 
-.test .sourceCode {
-  background-color: #e0e0ff;
-  padding: 1em;
-}
-
-pre.log {
+pre.log, table.src tr {
   background-color: #e0ffe0;
-  padding: 1em;
+  //-webkit-box-shadow: 0px 0px 6px 3px #888;
 }
 
-.log .info {
-  color: #0a0;
+pre.src, table.src tr {
+  background-color: #ffe0e0;
+  //-webkit-box-shadow: 3px 3px 3px #888;
 }
 
-.log .error {
-  color: #a00;
+pre.test {
+  background-color: #e0e0ff;
+  //-webkit-box-shadow: 0px 0px 6px 3px #888;
+}
+
+table.test, table.test tr {
+  background-color: #e0e0ff;
+}
+
+/*
+div.sourceCode {
+  -webkit-box-shadow: 0px 0px 6px 3px #888;
+}
+*/
+
+.reveal section img {
+  background: transparent;
+  border: none;
+  box-shadow: 1px 1px 5px #888;
 }
 
 underline {

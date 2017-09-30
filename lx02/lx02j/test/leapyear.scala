@@ -19,16 +19,8 @@ class LeapYearTest extends FlatSpec {
     assert(leapyear(1900) == (Some(false)))
   }
 
-  def compare_option[A](value: Option[A], expected: Option[A]) = {
-    (value, expected) match {
-      case (None, None) => true
-      case (Some(v1), Some(v2)) => v1 == v2
-      case _ => false
-    }
-  }
-
   "1899年前後" should "法律の施行時期を反映" in {
-    assert(compare_option(leapyear(1898), None))
-    assert(!compare_option(leapyear(1899), None))
+    assert(leapyear(1898) == None)
+    assert(leapyear(1899) != None)
   }
 }

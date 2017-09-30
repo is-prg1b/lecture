@@ -35,11 +35,14 @@ docs/slide/%.html: $(HTML_DEP) slide/%.md
 	@pandoc slide/slide.yaml $(md) \
 	  --include-in-header=slide/slide.header \
 	  --to=revealjs --slide-level=2 \
+	  --template=lib/default.revealjs \
 	  --standalone \
 	  --output=$(html1) \
+	  -V history=false \
  	  -V revealjs-url=/lecture/lib/reveal.js-3.5.0 \
  	  -V theme=serif \
 	  -V slideNumber=true \
+	  -V width=1280 -V height=1024 \
 	  --mathjax \
 	  --smart
 
@@ -56,7 +59,7 @@ docs/note/%.html: note/%.md
 	$(eval html := $(addprefix docs/note/, $(addsuffix .html, $(note))))
 
 	@echo "pandoc: $(note) => $(html)"
-	@pandoc note/note.yaml $(md) \
+	@pandoc note/note.yaml lib/header.md $(md) lib/footer.md \
 	  --include-in-header=note/note.header \
 	  --standalone --to=html --output=$(html) \
 	  --smart

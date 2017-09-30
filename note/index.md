@@ -4,9 +4,9 @@ title: プログラミング第一
 
 # 講義資料等
 
-- 9月26日 --- [講義資料](https://github.com/is-prg1b/lecture/raw/master/slide/day01.pdf) / [サンプルコード](https://github.com/is-prg1b/lx01) / **次回小テスト**
+- 9月26日 --- [講義資料](https://github.com/is-prg1b/lecture/raw/master/slide/day01.pdf) / サンプルコード (sbt project: `lx01`) / [makeとMakefile](/lecture/note/lx01-makefile.html) / **次回小テスト**
 
-- 9月29日 --- [講義資料](/lecture/slide/lx02.html) / [サンプルコード](https://github.com/is-prg1b/lecture/) (`lx02a` - `lx02k` projects)
+- 9月29日 --- [講義資料](/lecture/slide/lx02.html) / サンプルコード (sbt projects: `lx02a` -- `lx02k`) / [テスト実行のログ](/lecture/note/lx02-tests.html) / [小テスト](/lecture/quiz/quiz01.html)
 
 # 講義内容についての質問など
 
@@ -31,11 +31,10 @@ title: プログラミング第一
 
 # Gitリポジトリの初期化
 
-以下のような要領で`git`コマンドを実行するとGitHub上のリポジトリを複製できます．
+以下の要領で`git`コマンドを実行するとGitHub上のリポジトリを複製できます．
 
-~~~ {.bash}
+~~~ {.bash .src}
 git clone git@github.com:is-prg1b/lecture
-git clone git@github.com:is-prg1b/lx01
 ~~~
 
 GitHubのデータが更新された場合は，適宜 `git pull` して下さい．最新版に更新できます．
