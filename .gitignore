@@ -1,9 +1,27 @@
-/quiz
-/docs/quiz/*
+# Ignored file names
 quiz
+tmp
+*.key
+
+# Exception
 !/docs/quiz/quiz01*
 
-/.history
-/docs/tmp
-/slide/*.key
-/target
+# Generic rules
+*.class
+*.log
+
+# SBT specific rules
+.cache
+.history
+.lib/
+dist/*
+target/
+lib_managed/
+src_managed/
+project/boot/
+project/plugins/project/
+
+# osX
+.DS_Store
+._*
+Icon
