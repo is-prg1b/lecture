@@ -55,4 +55,3 @@ lazy val lx02j = (project in file(lx02 + "j")).settings(common)
 lazy val lx02k = (project in file(lx02 + "k")).settings(common)
 
 lazy val lx03 = (project in file("lx03")).settings(common)
-lazy val lx03fp = (project in file("lx03/fp")).settings(common)
