@@ -1,10 +1,6 @@
 # Ignored file names
-quiz
 tmp
 *.key
-
-# Exception
-!/docs/quiz/quiz01*
 
 # Generic rules
 *.class

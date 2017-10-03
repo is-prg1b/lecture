@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# decktape http://localhost:8080/quiz/quiz$1.html docs/quiz/quiz$1.pdf
+
+phantomjs \
+  `brew --cellar phantomjs`/*/share/phantomjs/examples/rasterize.js \
+  http://localhost:8080/lecture/quiz/quiz$1.html ../docs/quiz/quiz$1.pdf
