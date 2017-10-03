@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Ken Wakita" />
+  <title>小テスト１ 学籍番号： 氏名：</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { font-weight: bold; } /* Keyword */
+code > span.dt { text-decoration: underline; } /* DataType */
+code > span.co { font-style: italic; } /* Comment */
+code > span.al { font-weight: bold; } /* Alert */
+code > span.er { font-weight: bold; } /* Error */
+code > span.wa { font-style: italic; } /* Warning */
+code > span.cf { font-weight: bold; } /* ControlFlow */
+code > span.pp { font-weight: bold; } /* Preprocessor */
+code > span.do { font-style: italic; } /* Documentation */
+code > span.an { font-style: italic; } /* Annotation */
+code > span.cv { font-style: italic; } /* CommentVar */
+code > span.in { font-style: italic; } /* Information */
+  </style>
+  <script src="//use.edgefonts.net/source-code-pro.js"></script>
+  <link rel="stylesheet" type="text/css" href="/lecture/lib/reveal.js-3.5.0/css/theme/solarized.css">
+  <link rel="stylesheet" type="text/css" href="/lecture/lib/kw.css">
+</head>
+<body>
+<div id="header">
+<h1 class="title">小テスト１<br/>学籍番号：<br/>氏名：</h1>
+<h2 class="author">Ken Wakita</h2>
+</div>
+<p>あるフォルダに Makefile, simple.c, simple.scala のみがあるものとする．Makefileの内容は以下であり，simple.c, simple.scalaはそれぞれCとScalaで記述された，文法に沿って正しく記述され，意味のあるプログラムとする．</p>
+<div class="sourceCode" id="lx01-makefile"><table class="sourceCode makefile src numberLines"><tr class="sourceCode"><td class="lineNumbers"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre></td><td class="sourceCode"><pre><code class="sourceCode makefile"><span class="dv">all:</span><span class="dt"> simple Simple.class</span>
+
+<span class="dv">simple:</span><span class="dt"> simple.c</span>
+    clang -o simple simple.c
+
+<span class="dv">Simple.class:</span><span class="dt"> simple.scala</span>
+    scalac simple.scala
+
+<span class="dv">clean:</span>
+    rm -f simple simple.s *.class
+
+<span class="dv">run-c:</span><span class="dt"> ./simple</span>
+    ./simple</code></pre></td></tr></table></div>
+<div class="quiz">
+<ol style="list-style-type: decimal">
+<li><p>まず，<code>make simple</code> を実行した．このコマンド実行によって新規生成されるファイルの名前とそのファイルの働きを簡潔に説明しなさい．</p></li>
+<li><p>つぎに <code>make</code> を実行した．このコマンド実行によって新規生成されるファイルの名前とそのファイルの働きを簡潔に説明しなさい．</p></li>
+<li><p>再度 <code>make</code> を実行した．このコマンド実行によって新規生成されるファイルの名前とそのファイルの働きを簡潔に説明しなさい．</p></li>
+<li><p><code>simple.c</code> を修正した．修正後の <code>simple.c</code> は文法的に正しいものとする．ここで <code>make</code> を実行したときに新規生成されるファイルの内容とそのファイルの働きを簡潔に説明しなさい．</p></li>
+<li><p>上の <code>Makefile</code> には <code>simple.c</code> のプログラムを実行するための <code>run-c</code> 規則は書かれている．<code>simple.scala</code> の実行に相当するものはないので，それを <code>run-s</code> 規則として記述しなさい．</p></li>
+<li><p><code>make clean</code> を実行した．このコマンドの実行後にフォルダに残っているファイル名を列挙しなさい．</p></li>
+</ol>
+</div>
+</body>
+</html>
