@@ -8,7 +8,7 @@ title: プログラミング第一
 
 - 9月29日 --- [講義資料](/lecture/slide/lx02.html) / サンプルコード (sbt projects: `lx02a` -- `lx02k`) / [テスト実行のログ](/lecture/note/lx02-tests.html) / [小テスト](/lecture/quiz/quiz01.html)
 
-- 10月2日 --- [講義資料](https://github.com/is-prg1b/lecture/raw/master/slide/day03.pdf) / [補助スライド](/lecture/slide/lx03-exercise.html) / 次回小テスト
+- 10月2日 --- [講義資料](https://github.com/is-prg1b/lecture/raw/master/slide/day03.pdf) / サンプルコード (sbt project: `lx03`) / 次回小テスト
 
 # 講義内容についての質問など
 
