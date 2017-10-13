@@ -1,3 +1,7 @@
+@media print {
+  body { background-color: #ffffff; }
+}
+
 body {
   padding-left: 6ex;
   padding-right: 4ex;
@@ -99,6 +103,12 @@ p:hover span.footnote {
   color: #080;
 }
 
+/*
 .quiz li {
+  padding-bottom: 2ex;
+}
+*/
+
+.quiz li.long {
   padding-bottom: 10ex;
 }

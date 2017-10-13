@@ -19,7 +19,7 @@ clean:
 	rm -f $(HTML_TMP) $(HTML) $(PDF) $(NOTEHTML) $(QUIZHTML)
 
 # Markdown -> HTML is achieved in two-stages.
-html: server docs/index.html $(HTML)
+html: docs/index.html $(HTML)
 
 HTML_DEP = docs/dev/kw.js lib/phantom.js slide/slide.yaml
 
@@ -76,9 +76,3 @@ docs/quiz/%.html: quiz/%.md
 	  --standalone --to=html --output=$(html) \
 	  --highlight-style=monochrome \
 	  --smart
-
-server:
-	@wget --quiet --spider "http://localhost:8080/" || (cd $(HOME)/Sites; php -S localhost:8080 &)
-
-shutdown:
-	@killall php

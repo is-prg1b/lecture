@@ -11,6 +11,9 @@ val scalacheck = "org.scalacheck" %% "scalacheck" % "1.13.4" % "test"
 // 並行処理のための Akka Actor ライブラリ
 val akka_actor = "com.typesafe.akka" % "akka-actor_2.12" % "2.5.4"
 
+// GUI 記述のための ScalaFX ライブラリ
+val scala_fx = "org.scalafx" %% "scalafx" % "8.0.102-R11"
+
 // 以下の設定は脇田がスライドを作成するために sbt のなかから make コマンドを実行するため
 import scala.sys.process._
 lazy val make = taskKey[Unit]("Build with the Makefile")
@@ -24,7 +27,8 @@ lazy val common = Seq(
   scalacOptions := Seq("-feature", "-unchecked", "-deprecation"),
   libraryDependencies ++= Seq(scalactic, scalatest, scalacheck),
 
-  fork in (Test, run) := true,
+  fork in Test := true,
+  fork in run := true,
   connectInput := true,
 
   // Scalaのプログラムの置き場所を非標準の場所に指定．通常はこのような設定はせずにデフォルトの src/scala/*.scala, test/scala/*.scala に置きます．通常の設定ではJavaとの共存のためにsrcとtestの下に scala と java のためのディレクトリを用意しているのですが，本実習ではJavaのプログラムを書くことはないので，非標準ですが単純な構成を施しています．
@@ -55,3 +59,6 @@ lazy val lx02j = (project in file(lx02 + "j")).settings(common)
 lazy val lx02k = (project in file(lx02 + "k")).settings(common)
 
 lazy val lx03 = (project in file("lx03")).settings(common)
+
+lazy val lx04 = (project in file("lx04")).settings(common,
+  libraryDependencies += scala_fx)
