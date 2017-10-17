@@ -24,8 +24,10 @@ lazy val common = Seq(
 
   // scalac に与えるオプション
   scalaVersion := "2.12.3",   // コンパイルに使う scalac のバージョン
-  scalacOptions := Seq("-feature", "-unchecked", "-deprecation"),
-  libraryDependencies ++= Seq(scalactic, scalatest, scalacheck),
+  scalacOptions := Seq("-feature", "-unchecked", "-deprecation",
+    "-Ywarn-dead-code", "-Ywarn-unused", "-Ywarn-unused-import"),
+  // libraryDependencies ++= Seq(scalactic, scalatest, scalacheck),
+  libraryDependencies ++= Seq(scalatest),
 
   fork in Test := true,
   fork in run := true,
@@ -40,10 +42,12 @@ lazy val common = Seq(
   make := { "make" ! }
 )
 
+lazy val common_fx = common ++ Seq(libraryDependencies ++= Seq(scala_fx))
+
 // サブプロジェクト群の定義．このように定めることで，共通の `build.sbt` でたくさんのプロジェクトの設定を一括して施しています．
 lazy val root = (project in file(".")).settings(common)
 
-lazy val lx01 = project.settings(common)
+lazy val lx01 = (project in file("lx01")).settings(common)
 
 val lx02 = "lx02/lx02"
 lazy val lx02a = (project in file(lx02 + "a")).settings(common)
@@ -59,6 +63,5 @@ lazy val lx02j = (project in file(lx02 + "j")).settings(common)
 lazy val lx02k = (project in file(lx02 + "k")).settings(common)
 
 lazy val lx03 = (project in file("lx03")).settings(common)
-
-lazy val lx04 = (project in file("lx04")).settings(common,
-  libraryDependencies += scala_fx)
+lazy val lx04 = (project in file("lx04")).settings(common_fx)
+lazy val lx05 = (project in file("lx05")).settings(common_fx)
