@@ -103,12 +103,6 @@ p:hover span.footnote {
   color: #080;
 }
 
-/*
-.quiz li {
-  padding-bottom: 2ex;
-}
-*/
-
 .quiz li.long {
   padding-bottom: 10ex;
 }

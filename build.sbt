@@ -14,6 +14,9 @@ val akka_actor = "com.typesafe.akka" % "akka-actor_2.12" % "2.5.4"
 // GUI 記述のための ScalaFX ライブラリ
 val scala_fx = "org.scalafx" %% "scalafx" % "8.0.102-R11"
 
+val silencer_plugin = "com.github.ghik" %% "silencer-plugin" % "0.5"
+val silencer_lib    = "com.github.ghik" %% "silencer-lib"    % "0.5"
+
 // 以下の設定は脇田がスライドを作成するために sbt のなかから make コマンドを実行するため
 import scala.sys.process._
 lazy val make = taskKey[Unit]("Build with the Makefile")
@@ -26,8 +29,11 @@ lazy val common = Seq(
   scalaVersion := "2.12.3",   // コンパイルに使う scalac のバージョン
   scalacOptions := Seq("-feature", "-unchecked", "-deprecation",
     "-Ywarn-dead-code", "-Ywarn-unused", "-Ywarn-unused-import"),
+
+  addCompilerPlugin(silencer_plugin),
+
   // libraryDependencies ++= Seq(scalactic, scalatest, scalacheck),
-  libraryDependencies ++= Seq(scalatest),
+  libraryDependencies ++= Seq(scalatest, silencer_lib),
 
   fork in Test := true,
   fork in run := true,
@@ -65,3 +71,4 @@ lazy val lx02k = (project in file(lx02 + "k")).settings(common)
 lazy val lx03 = (project in file("lx03")).settings(common)
 lazy val lx04 = (project in file("lx04")).settings(common_fx)
 lazy val lx05 = (project in file("lx05")).settings(common_fx)
+lazy val lx06 = (project in file("lx06")).settings(common_fx)
