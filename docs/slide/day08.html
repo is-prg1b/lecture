@@ -1,0 +1,449 @@
+<!DOCTYPE html><html class="js no-mobile desktop no-ie safari safari538 lecture-section tmp-section w-400 gt-240 gt-320 lt-480 lt-640 lt-768 lt-800 lt-1024 lt-1280 lt-1440 lt-1680 lt-1920 no-portrait landscape gradient rgba opacity textshadow multiplebgs boxshadow borderimage borderradius cssreflections csstransforms csstransitions touch no-retina no-fontface domloaded wf-sourcecodepro-i4-active wf-sourcecodepro-i7-active wf-sourcecodepro-n4-active wf-sourcecodepro-n7-active wf-active" id="day08-page"><head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Ken Wakita (https://is-prg1b.github.io/lecture/)">
+  <title>PRG1 (8): 多相型</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="/lecture/lib/reveal.js-3.5.0/css/reveal.css">
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      .smallcaps{font-variant: small-caps;}
+      .line-block{white-space: pre-line;}
+  </style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="/lecture/lib/reveal.js-3.5.0/css/theme/serif.css" id="theme">
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? '/lecture/lib/reveal.js-3.5.0/css/print/pdf.css' : '/lecture/lib/reveal.js-3.5.0/css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script><link rel="stylesheet" type="text/css" href="/lecture/lib/reveal.js-3.5.0/css/print/paper.css">
+  <!--[if lt IE 9]>
+  <script src="/lecture/lib/reveal.js-3.5.0/lib/js/html5shiv.js"></script>
+  <![endif]-->
+  <link rel="stylesheet" href="https://use.edgefonts.net/c/7d333d/1w;source-code-pro,2,gm0:W:i4,gm6:W:i7,glz:W:n4,gm5:W:n7/k/localhost" media="all"><script src="//use.edgefonts.net/source-code-pro.js"></script>
+  <link rel="stylesheet" type="text/css" href="/lecture/lib/kw.css"><script type="text/javascript" src="/lecture/lib/reveal.js-3.5.0/plugin/zoom-js/zoom.js"></script><script type="text/javascript" src="/lecture/lib/reveal.js-3.5.0/plugin/notes/notes.js"></script>
+</head>
+<body style="-webkit-transition: -webkit-transform 0.8s ease; transition: -webkit-transform 0.8s ease;">
+  <div class="reveal slide center ready" role="application" data-transition-speed="default" data-background-transition="fade">
+    <div class="slides" style="width: 1280px; height: 1024px; left: 50%; top: 50%; bottom: auto; right: auto; -webkit-transform: translate(-50%, -50%) scale(0.28125);">
+
+<section style="top: 362px; display: block;" class="present">
+  <h1 class="title">PRG1 (8): 多相型</h1>
+  <p class="author">Ken Wakita (<a href="https://is-prg1b.github.io/lecture/" class="uri">https://is-prg1b.github.io/lecture/</a>)</p>
+  <p class="date">2017.10.27</p>
+</section>
+
+<section style="top: 0px; display: block;" hidden="" aria-hidden="true" class="stack future"><section id="多層型" class="titleslide slide level1" style="top: 434px; display: block;"><h1>多層型</h1></section><section id="findfirstint" class="slide level2 future" aria-hidden="true" style="top: 181px; display: block;">
+<h2><code>findFirstInt</code></h2>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">def</span> <span class="fu">findFirstInt</span>(key: Int, seq: List[Int]): Option[Int] = {
+  <span class="kw">def</span> <span class="fu">aux</span>(i: Int, seq: List[Int]): Option[Int] = {
+    seq <span class="kw">match</span> {
+      <span class="kw">case</span> Nil =&gt; None
+      <span class="kw">case</span> x :: _ <span class="kw">if</span> x == key =&gt; Some(i)
+      <span class="kw">case</span> _ :: rest =&gt; <span class="fu">aux</span>(i + <span class="dv">1</span>, rest)
+    }
+  }
+  <span class="fu">aux</span>(<span class="dv">0</span>, seq)
+}</code></pre></div>
+<p><code>findFirstInt</code>: 配列 (<code>ss: Array[Int]</code>) のなかから、検索キーの数 (<code>key: Int</code>) に合致する最初のデータの位置を返す。見つからない場合は -1 を返す。</p>
+</section><section id="findfirststring" class="slide level2 future" aria-hidden="true" style="top: 512px; display: none;">
+<h2><code>findFirstString</code></h2>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">def</span> <span class="fu">findFirstString</span>(key: String, seq: List[String]): Option[Int] = {
+  <span class="kw">def</span> <span class="fu">aux</span>(i: Int, seq: List[String]): Option[Int] = {
+    seq <span class="kw">match</span> {
+      <span class="kw">case</span> Nil =&gt; None
+      <span class="kw">case</span> x :: _ <span class="kw">if</span> x == key =&gt; Some(i)
+      <span class="kw">case</span> _ :: rest =&gt; <span class="fu">aux</span>(i + <span class="dv">1</span>, rest)
+    }
+  }
+  <span class="fu">aux</span>(<span class="dv">0</span>, seq)
+}</code></pre></div>
+<p><code>findFirstString</code>: 配列 (<code>ss: Array[String]</code>) のなかから、検索キーの文字列 (<code>key: String</code>) に合致する最初のデータの位置を返す。見つからない場合は -1 を返す。</p>
+</section><section id="findfirststring-vs-int" class="slide level2 future" aria-hidden="true" style="top: 512px; display: none;">
+<h2>findFirst{String vs Int}</h2>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">def</span> <span class="fu">findFirstInt</span>(key: Int, seq: List[Int]): Option[Int] = {
+  <span class="kw">def</span> <span class="fu">aux</span>(i: Int, seq: List[Int]): Option[Int] = {
+    seq <span class="kw">match</span> {
+      <span class="kw">case</span> Nil =&gt; None
+      <span class="kw">case</span> x :: _ <span class="kw">if</span> x == key =&gt; Some(i)
+      <span class="kw">case</span> _ :: rest =&gt; <span class="fu">aux</span>(i + <span class="dv">1</span>, rest)
+    }
+  }
+  <span class="fu">aux</span>(<span class="dv">0</span>, seq)
+}</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">def</span> <span class="fu">findFirstString</span>(key: String, seq: List[String]): Option[Int] = {
+  <span class="kw">def</span> <span class="fu">aux</span>(i: Int, seq: List[String]): Option[Int] = {
+    seq <span class="kw">match</span> {
+      <span class="kw">case</span> Nil =&gt; None
+      <span class="kw">case</span> x :: _ <span class="kw">if</span> x == key =&gt; Some(i)
+      <span class="kw">case</span> _ :: rest =&gt; <span class="fu">aux</span>(i + <span class="dv">1</span>, rest)
+    }
+  }
+  <span class="fu">aux</span>(<span class="dv">0</span>, seq)
+}</code></pre></div>
+<p>瓜ふたつ．違いはどこ？</p>
+</section><section id="findfirststring-vs-int-1" class="slide level2 future" aria-hidden="true" style="top: 512px; display: none;">
+<h2>findFirst{String vs Int}</h2>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">def</span> <span class="fu">findFirstInt</span>(key: Int, seq: List[Int]): Option[Int] = {
+  <span class="kw">def</span> <span class="fu">aux</span>(i: Int, seq: List[Int]): Option[Int] = {
+    seq <span class="kw">match</span> {
+      <span class="kw">case</span> Nil =&gt; None
+      <span class="kw">case</span> x :: _ <span class="kw">if</span> x == key =&gt; Some(i)
+      <span class="kw">case</span> _ :: rest =&gt; <span class="fu">aux</span>(i + <span class="dv">1</span>, rest)
+    }
+  }
+  <span class="fu">aux</span>(<span class="dv">0</span>, seq)
+}</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">def</span> <span class="fu">findFirstString</span>(key: String, seq: List[String]): Option[Int] = {
+  <span class="kw">def</span> <span class="fu">aux</span>(i: Int, seq: List[String]): Option[Int] = {
+    seq <span class="kw">match</span> {
+      <span class="kw">case</span> Nil =&gt; None
+      <span class="kw">case</span> x :: _ <span class="kw">if</span> x == key =&gt; Some(i)
+      <span class="kw">case</span> _ :: rest =&gt; <span class="fu">aux</span>(i + <span class="dv">1</span>, rest)
+    }
+  }
+  <span class="fu">aux</span>(<span class="dv">0</span>, seq)
+}</code></pre></div>
+<ol type="1">
+<li>関数名</li>
+</ol>
+</section><section id="findfirststring-vs-int-2" class="slide level2 future" aria-hidden="true" style="top: 512px; display: none;">
+<h2>findFirst{String vs Int}</h2>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">def</span> <span class="fu">findFirstInt</span>(key: Int, seq: List[Int]): Option[Int] = {
+  <span class="kw">def</span> <span class="fu">aux</span>(i: Int, seq: List[Int]): Option[Int] = {
+    seq <span class="kw">match</span> {
+      <span class="kw">case</span> Nil =&gt; None
+      <span class="kw">case</span> x :: _ <span class="kw">if</span> x == key =&gt; Some(i)
+      <span class="kw">case</span> _ :: rest =&gt; <span class="fu">aux</span>(i + <span class="dv">1</span>, rest)
+    }
+  }
+  <span class="fu">aux</span>(<span class="dv">0</span>, seq)
+}</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">def</span> <span class="fu">findFirstString</span>(key: String, seq: List[String]): Option[Int] = {
+  <span class="kw">def</span> <span class="fu">aux</span>(i: Int, seq: List[String]): Option[Int] = {
+    seq <span class="kw">match</span> {
+      <span class="kw">case</span> Nil =&gt; None
+      <span class="kw">case</span> x :: _ <span class="kw">if</span> x == key =&gt; Some(i)
+      <span class="kw">case</span> _ :: rest =&gt; <span class="fu">aux</span>(i + <span class="dv">1</span>, rest)
+    }
+  }
+  <span class="fu">aux</span>(<span class="dv">0</span>, seq)
+}</code></pre></div>
+<ol type="1">
+<li>関数名</li>
+<li>引数の型</li>
+</ol>
+</section><section id="findfirststring-vs-int-3" class="slide level2 future" aria-hidden="true" style="top: 512px; display: none;">
+<h2>findFirst{String vs Int}</h2>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">def</span> <span class="fu">findFirstInt</span>(key: Int, seq: List[Int]): Option[Int] = {
+  <span class="kw">def</span> <span class="fu">aux</span>(i: Int, seq: List[Int]): Option[Int] = {
+    seq <span class="kw">match</span> {
+      <span class="kw">case</span> Nil =&gt; None
+      <span class="kw">case</span> x :: _ <span class="kw">if</span> x == key =&gt; Some(i)
+      <span class="kw">case</span> _ :: rest =&gt; <span class="fu">aux</span>(i + <span class="dv">1</span>, rest)
+    }
+  }
+  <span class="fu">aux</span>(<span class="dv">0</span>, seq)
+}</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">def</span> <span class="fu">findFirstString</span>(key: String, seq: List[String]): Option[Int] = {
+  <span class="kw">def</span> <span class="fu">aux</span>(i: Int, seq: List[String]): Option[Int] = {
+    seq <span class="kw">match</span> {
+      <span class="kw">case</span> Nil =&gt; None
+      <span class="kw">case</span> x :: _ <span class="kw">if</span> x == key =&gt; Some(i)
+      <span class="kw">case</span> _ :: rest =&gt; <span class="fu">aux</span>(i + <span class="dv">1</span>, rest)
+    }
+  }
+  <span class="fu">aux</span>(<span class="dv">0</span>, seq)
+}</code></pre></div>
+<ol type="1">
+<li>関数名</li>
+<li>引数の型</li>
+</ol>
+</section><section id="findfirststring-vs-int-4" class="slide level2 future" aria-hidden="true" style="top: 512px; display: none;">
+<h2>findFirst{String vs Int}</h2>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">def</span> <span class="fu">findFirstInt</span>(key: Int, seq: List[Int]): Option[Int] = {
+  <span class="kw">def</span> <span class="fu">aux</span>(i: Int, seq: List[Int]): Option[Int] = {
+    seq <span class="kw">match</span> {
+      <span class="kw">case</span> Nil =&gt; None
+      <span class="kw">case</span> x :: _ <span class="kw">if</span> x == key =&gt; Some(i)
+      <span class="kw">case</span> _ :: rest =&gt; <span class="fu">aux</span>(i + <span class="dv">1</span>, rest)
+    }
+  }
+  <span class="fu">aux</span>(<span class="dv">0</span>, seq)
+}</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">def</span> <span class="fu">findFirstString</span>(key: String, seq: List[String]): Option[Int] = {
+  <span class="kw">def</span> <span class="fu">aux</span>(i: Int, seq: List[String]): Option[Int] = {
+    seq <span class="kw">match</span> {
+      <span class="kw">case</span> Nil =&gt; None
+      <span class="kw">case</span> x :: _ <span class="kw">if</span> x == key =&gt; Some(i)
+      <span class="kw">case</span> _ :: rest =&gt; <span class="fu">aux</span>(i + <span class="dv">1</span>, rest)
+    }
+  }
+  <span class="fu">aux</span>(<span class="dv">0</span>, seq)
+}</code></pre></div>
+<ol type="1">
+<li>関数名</li>
+<li>引数の型</li>
+<li><code>aux</code>の引数の型</li>
+</ol>
+</section><section id="関数の多重定義findfirst" class="slide level2 future" aria-hidden="true" style="top: 512px; display: none;">
+<h2>関数の多重定義：findFirst</h2>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">def</span> <span class="fu">findFirst</span>(key: Int, seq: List[Int]): Option[Int] = {
+  <span class="kw">def</span> <span class="fu">aux</span>(i: Int, seq: List[Int]): Option[Int] = {
+    seq <span class="kw">match</span> {
+      <span class="kw">case</span> Nil =&gt; None
+      <span class="kw">case</span> x :: _ <span class="kw">if</span> x == key =&gt; Some(i)
+      <span class="kw">case</span> _ :: rest =&gt; <span class="fu">aux</span>(i + <span class="dv">1</span>, rest)
+    }
+  }
+  <span class="fu">aux</span>(<span class="dv">0</span>, seq)
+}</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">def</span> <span class="fu">findFirst</span>(key: String, seq: List[String]): Option[Int] = {
+  <span class="kw">def</span> <span class="fu">aux</span>(i: Int, seq: List[String]): Option[Int] = {
+    seq <span class="kw">match</span> {
+      <span class="kw">case</span> Nil =&gt; None
+      <span class="kw">case</span> x :: _ <span class="kw">if</span> x == key =&gt; Some(i)
+      <span class="kw">case</span> _ :: rest =&gt; <span class="fu">aux</span>(i + <span class="dv">1</span>, rest)
+    }
+  }
+  <span class="fu">aux</span>(<span class="dv">0</span>, seq)
+}</code></pre></div>
+<dl>
+<dt>多重定義 (Overloading)</dt>
+<dd>名前が同じで引数の型だけが異なる関数群を用意すること，あるいは同じ演算記号について引数の型に応じて異なる意味を与えること．
+</dd>
+</dl>
+</section><section id="型変数-a" class="slide level2 future" aria-hidden="true" style="top: 512px; display: none;">
+<h2>型変数 <code>A</code></h2>
+<ul>
+<li><p>型変数の導入: <code>def findFirst[A] ...</code></p>
+<ul>
+<li><p>新たな型変数 <code>A</code> を導入する。その変数 <code>A</code> の有効範囲は <code>def</code> の範囲。</p></li>
+<li><p>型変数 <code>A</code> の意味：「ある型があって、その名前をひとまず <code>A</code> としておこう」、(簡単に)「任意の型 <code>A</code> について」</p></li>
+</ul></li>
+<li>型構成子の型変数への適用: <code>Array[A]</code>
+<ul>
+<li><p><code>Array[A]</code>: 任意の型 <code>A</code> に関して、型構成子 <code>Array</code> を型 <code>A</code> について特殊化したもの。</p></li>
+<li><p><code>Array</code> の場合 <code>A</code> は <code>Array</code> が表す配列が要素とするデータの型なので、 <code>Array[A]</code> は、<code>A</code>型のデータを要素とする配列の型と読める。</p></li>
+</ul></li>
+</ul>
+</section><section id="class-arraytが提供する単相関数" class="slide level2 future" aria-hidden="true" style="top: 512px; display: none;">
+<h2><code>class Array[T]</code>が提供する単相関数</h2>
+<p>型変数に依存しない関数群</p>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">def</span> isEmpty: Boolean
+
+<span class="kw">def</span> length:  Int
+
+<span class="kw">def</span> size:    Int</code></pre></div>
+</section><section id="class-arraytが提供する多相関数" class="slide level2 future" aria-hidden="true" style="top: 512px; display: none;">
+<h2><code>class Array[T]</code>が提供する多相関数 </h2>
+<p>出現する型変数が <code>T</code> だけで、返り値の型が単純なもの</p>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">def</span> <span class="fu">indexOf</span>(T): <span class="dt">int</span>
+
+<span class="kw">def</span> <span class="fu">forall</span>(p: (T) ⇒ Boolean): Boolean    <span class="co">// ∀</span>
+
+<span class="fu">exists</span>(p: (T) ⇒ Boolean): Boolean          <span class="co">// ∃</span>
+
+<span class="kw">def</span> <span class="fu">indexOf</span>(elem: T): <span class="dt">int</span>    <span class="co">// Array(1, 2, 3).indexOf(3) =&gt; 2</span>
+
+<span class="kw">def</span> <span class="fu">count</span>(p: (T) ⇒ Boolean): Int <span class="co">// Range(1,…, 99).toArray.count(奇数) =&gt; 50</span></code></pre></div>
+</section><section id="class-arraytが提供する多相関数-1" class="slide level2 future" aria-hidden="true" style="top: 512px; display: none;">
+<h2><code>class Array[T]</code>が提供する多相関数 </h2>
+<p>出現する型変数が<code>T</code>だけで、返り値の型が<code>T</code>を含むもの</p>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">def</span> head: T
+
+<span class="kw">def</span> last: T
+
+<span class="kw">def</span> init: Array[T]    <span class="co">// Array(Vn, v) =&gt; Array(Vn)</span>
+
+<span class="kw">def</span> tail: Array[T]    <span class="co">// Array(v, Vn) =&gt; Array(Vn)</span>
+
+<span class="kw">def</span> <span class="fu">take</span>(Int): Array[T]    <span class="co">// Array(Vk, v, …) =&gt; Array(Vk)</span>
+
+<span class="fu">drop</span>(Int): Array[T]    <span class="co">// Array(Vk, v, …) =&gt; Array(v, …)</span></code></pre></div>
+</section><section id="class-arraytが提供する多相関数-2" class="slide level2 future" aria-hidden="true" style="top: 512px; display: none;">
+<h2><code>class Array[T]</code>が提供する多相関数 </h2>
+<p>型変数<code>T</code>が引数にも返り値にも出現するもの</p>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">def</span> <span class="fu">filter</span>((T) ⇒ Boolean): Array[T]
+    <span class="co">// Array(1, 2, 3, 4, 5).filter(奇数) =&gt; Array(1, 3, 5)</span>
+    <span class="co">// Array(1, 2, 3, 4, 5).filter((n: Int) =&gt; n%2==1)</span>
+
+<span class="kw">def</span> foldLeft[B](B) ((B, T) ⇒ B): B</code></pre></div>
+</section><section id="trait-sett-が提供する関数" class="slide level2 future" aria-hidden="true" style="top: 512px; display: none;">
+<h2>trait Set[T] が提供する関数</h2>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala">isEmpty: Boolean
+
+empty: Set[A]
+
+<span class="fu">contains</span>(A): Boolean
+
+<span class="fu">diff</span>(GenSet[A]): Set[A]
+
+<span class="fu">union</span>(GenSet[A]): Set[A]
+
+map[B]((A) ⇒ B): Set[B]    <span class="co">// Array(1, 2, 3).map((x: Int) =&gt; x.toString)</span>
+
+<span class="fu">subsets</span>(): Iterator[Set[A]] <span class="co">// Set(1, 2, 3).subsets().foreach(println)</span></code></pre></div>
+</section></section>
+<section style="top: 0px; display: block;" hidden="" aria-hidden="true" class="stack future"><section id="scala-の-api-マニュアル" class="titleslide slide level1" style="top: 434px; display: block;"><h1>Scala の API マニュアル</h1></section><section id="scala-の-api-マニュアル-のさがし方" class="slide level2 future" aria-hidden="true" style="top: 512px; display: none;">
+<h2>Scala の API マニュアル のさがし方</h2>
+<p><code>scaladoc</code> で検索し，<code>API</code> メニューから <code>Current</code> を選択．慎重な人は <code>All Versions</code> から適切なものを選択</p>
+</section><section id="scala-の-api-マニュアル-1" class="slide level2 future" aria-hidden="true" style="top: 512px; display: none;">
+<h2>Scala の API マニュアル</h2>
+<figure>
+<img src="/lecture/image/08/scaladoc-root.png" alt="ドキュメントのトップページ"><figcaption>ドキュメントのトップページ</figcaption>
+</figure>
+<ul>
+<li><p>Scala の超基本機能は右端の <code>scala</code> をクリック</p></li>
+<li><p>その他の機能は，このページの説明を参照．</p></li>
+</ul>
+</section><section id="scala-のドキュメントページの機能" class="slide level2 future" aria-hidden="true" style="top: 512px; display: none;">
+<h2>Scala のドキュメントページの機能</h2>
+<figure>
+<img src="/lecture/image/08/scaladoc-array.png" alt="ドキュメントのトップページ"><figcaption>ドキュメントのトップページ</figcaption>
+</figure>
+<ul>
+<li><p>パッケージ名がクリックできる</p></li>
+<li><p>クラスと Companion オブジェクトの切り替え</p></li>
+<li><p><code>trait</code> を用いたドキュメントのフィルタ（慣れるとかなり便利）</p></li>
+</ul>
+</section><section id="ドキュメント閲覧ソフト" class="slide level2 future" aria-hidden="true" style="top: 512px; display: none;">
+<h2>ドキュメント閲覧ソフト</h2>
+<dl>
+<dt>Macユーザ</dt>
+<dd><a href="https://kapeli.com/dash">Dash</a> （強力な検索能力）
+</dd>
+<dt>Windows 10 ユーザ</dt>
+<dd><a href="https://zealdocs.org/">Zeal</a> （Dash に啓発された Win アプリ）
+</dd>
+</dl>
+<p>ドキュメントダウンロード機能でScala のドキュメントをダウンロードして利用．</p>
+<h3 id="どちらも利用できない人">どちらも利用できない人</h3>
+<p><a href="http://scala-lang.org/download/all.html">本家のドキュメントをダウンロード</a>して利用。自分が利用している Scala のバージョン(2.12.4 かな)のページを開き、API DocsのZipファイル (例えば <code>scala-docs-2.12.4.zip</code>) をダウンロードしたあとで展開して利用する。</p>
+</section><section id="クラスとcompanionオブジェクト連れ合いのオブジェクト" class="slide level2 future" aria-hidden="true" style="top: 512px; display: none;">
+<h2>クラスとCompanionオブジェクト （連れ合いのオブジェクト）</h2>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">class</span> Int vs <span class="kw">object</span> Int
+
+<span class="kw">class</span> Array vs <span class="kw">object</span> Array
+
+<span class="kw">class</span> List vs <span class="kw">object</span> List
+
+<span class="kw">trait</span> Set vs <span class="kw">object</span> Set</code></pre></div>
+</section><section id="class-int-vs-object-int" class="slide level2 future" aria-hidden="true" style="top: 512px; display: none;">
+<h2>class Int vs object Int</h2>
+<h3 id="class-int">class <code>Int</code></h3>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala">算術演算子: +, -, *, /
+
+比較演算子: &gt;, &lt;, ==
+
+ビット毎演算子
+
+min, max, signum</code></pre></div>
+<h3 id="object-int">object <code>Int</code></h3>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala">Int.<span class="fu">MaxValue</span> (= <span class="dv">2147483647</span>), Int.<span class="fu">MinValue</span> (= -<span class="dv">2147483648</span>) <span class="co">// class Intに関する情報</span>
+
+Int.<span class="fu">toString</span></code></pre></div>
+</section><section id="class-array-vs-object-array" class="slide level2 future" aria-hidden="true" style="top: 512px; display: none;">
+<h2>class Array vs object Array</h2>
+<p><code>class Array</code> については，すでに取り上げたので省略</p>
+<h3 id="object-array">object Array</h3>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala">empty[T]: Array[T]
+
+emptyIntArray: Array[Int]
+
+fill[T](Int)(elem: =&gt; T): Array[T]
+  <span class="co">// Array.fill(5)(3)</span>
+  <span class="co">// Array.fill(100)(math.random)</span>
+
+ofDim[T](n1: Int, n2: Int): Array[Array[T]]
+  <span class="co">// Array.ofDim[Int](3, 4)</span>
+
+tabulate[T](n1: Int, n2: Int, n3: Int)(f: (Int, Int, Int) ⇒ T): Array[T]
+  <span class="co">// Array.tabulate[Double](3, 3)((n1: Int, n2: Int) =&gt; if (n1 == n2) 1.0 else 0.0)</span></code></pre></div>
+</section><section id="object-list" class="slide level2 future" aria-hidden="true" style="top: 512px; display: none;">
+<h2>object List</h2>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala">empty[A]: List[A]
+
+iterate[A](A, <span class="dt">int</span>)((A) ⇒ A)
+  <span class="co">//List.iterate(List.empty[Int], 4)((l: List[Int]) =&gt; 0::l)</span>
+
+range[T](T, T)
+  <span class="co">// List.range(0, 20, 3)</span></code></pre></div>
+</section></section>
+    </div>
+  <div class="backgrounds"><div class="slide-background present" data-loaded="true" style="display: block;"></div><div class="slide-background stack future" data-loaded="true" style="display: block;"><div class="slide-background titleslide slide level1 present" data-loaded="true" style="display: block;"></div><div class="slide-background slide level2 future" data-loaded="true" style="display: block;"></div><div class="slide-background slide level2 future" style="display: none;"></div><div class="slide-background slide level2 future" style="display: none;"></div><div class="slide-background slide level2 future" style="display: none;"></div><div class="slide-background slide level2 future" style="display: none;"></div><div class="slide-background slide level2 future" style="display: none;"></div><div class="slide-background slide level2 future" style="display: none;"></div><div class="slide-background slide level2 future" style="display: none;"></div><div class="slide-background slide level2 future" style="display: none;"></div><div class="slide-background slide level2 future" style="display: none;"></div><div class="slide-background slide level2 future" style="display: none;"></div><div class="slide-background slide level2 future" style="display: none;"></div><div class="slide-background slide level2 future" style="display: none;"></div><div class="slide-background slide level2 future" style="display: none;"></div></div><div class="slide-background stack future" data-loaded="true" style="display: block;"><div class="slide-background titleslide slide level1 present" data-loaded="true" style="display: block;"></div><div class="slide-background slide level2 future" style="display: none;"></div><div class="slide-background slide level2 future" style="display: none;"></div><div class="slide-background slide level2 future" style="display: none;"></div><div class="slide-background slide level2 future" style="display: none;"></div><div class="slide-background slide level2 future" style="display: none;"></div><div class="slide-background slide level2 future" style="display: none;"></div><div class="slide-background slide level2 future" style="display: none;"></div><div class="slide-background slide level2 future" style="display: none;"></div></div></div><div class="progress" style="display: block;"><span style="width: 0px;"></span></div><aside class="controls" style="display: block;"><button class="navigate-left" aria-label="previous slide" disabled="disabled"></button><button class="navigate-right enabled" aria-label="next slide"></button><button class="navigate-up" aria-label="above slide" disabled="disabled"></button><button class="navigate-down" aria-label="below slide" disabled="disabled"></button></aside><div class="slide-number" style="display: block;"><span class="slide-number-a">1</span></div><div class="speaker-notes" data-prevent-swipe="" tabindex="0"></div><div class="pause-overlay"></div><div id="aria-status-div" aria-live="polite" aria-atomic="true" style="position: absolute; height: 1px; width: 1px; overflow: hidden; clip: rect(1px 1px 1px 1px);">
+  PRG1 (8): 多相型
+  Ken Wakita (https://is-prg1b.github.io/lecture/)
+  2017.10.27
+</div></div>
+
+  <script src="/lecture/lib/reveal.js-3.5.0/lib/js/head.min.js"></script>
+  <script src="/lecture/lib/reveal.js-3.5.0/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display the page number of the current slide
+        slideNumber: true,
+        // Push each slide change to the browser history
+        history: false,
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1280,
+        height: 1024,
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: '/lecture/lib/reveal.js-3.5.0/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: '/lecture/lib/reveal.js-3.5.0/plugin/zoom-js/zoom.js', async: true },
+          { src: '/lecture/lib/reveal.js-3.5.0/plugin/notes/notes.js', async: true }
+        ]
+      });
+    </script>
+    
+
+</body></html>

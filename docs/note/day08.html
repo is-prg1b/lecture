@@ -1,0 +1,240 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Ken Wakita (https://is-prg1b.github.io/lecture/)" />
+  <title>PRG1 (8): 多相型</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <script src="//use.edgefonts.net/source-code-pro.js"></script>
+  <script type="text/javascript" src="/lecture/lib/reveal.js-3.5.0/plugin/highlight/highlight.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <link rel="stylesheet" type="text/css" href="/lecture/lib/reveal.js-3.5.0/css/theme/solarized.css">
+  <link rel="stylesheet" type="text/css" href="/lecture/lib/kw.css">
+</head>
+<body>
+<div id="header">
+<h1 class="title">PRG1 (8): 多相型</h1>
+<h2 class="author">Ken Wakita (<a href="https://is-prg1b.github.io/lecture/" class="uri">https://is-prg1b.github.io/lecture/</a>)</h2>
+<h3 class="date">2017.10.27</h3>
+</div>
+<p><a href="/lecture/note/">トップページへ</a></p>
+<hr />
+<h2 id="findfirstint"><code>findFirstInt</code></h2>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">def</span> <span class="fu">findFirstInt</span>(key: Int, seq: List[Int]): Option[Int] = {
+  <span class="kw">def</span> <span class="fu">aux</span>(i: Int, seq: List[Int]): Option[Int] = {
+    seq <span class="kw">match</span> {
+      <span class="kw">case</span> Nil =&gt; None
+      <span class="kw">case</span> x :: _ <span class="kw">if</span> x == key =&gt; Some(i)
+      <span class="kw">case</span> _ :: rest =&gt; <span class="fu">aux</span>(i + <span class="dv">1</span>, rest)
+    }
+  }
+  <span class="fu">aux</span>(<span class="dv">0</span>, seq)
+}</code></pre></div>
+<p><code>findFirstInt</code>: 配列 (<code>ss: Array[Int]</code>) のなかから、検索キーの数 (<code>key: Int</code>) に合致する最初のデータの位置を返す。見つからない場合は -1 を返す。</p>
+<h2 id="findfirststring"><code>findFirstString</code></h2>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">def</span> <span class="fu">findFirstString</span>(key: String, seq: List[String]): Option[Int] = {
+  <span class="kw">def</span> <span class="fu">aux</span>(i: Int, seq: List[String]): Option[Int] = {
+    seq <span class="kw">match</span> {
+      <span class="kw">case</span> Nil =&gt; None
+      <span class="kw">case</span> x :: _ <span class="kw">if</span> x == key =&gt; Some(i)
+      <span class="kw">case</span> _ :: rest =&gt; <span class="fu">aux</span>(i + <span class="dv">1</span>, rest)
+    }
+  }
+  <span class="fu">aux</span>(<span class="dv">0</span>, seq)
+}</code></pre></div>
+<p><code>findFirstString</code>: 配列 (<code>ss: Array[String]</code>) のなかから、検索キーの文字列 (<code>key: String</code>) に合致する最初のデータの位置を返す。見つからない場合は -1 を返す。</p>
+<h2 id="findfirststring-vs-int">findFirst{String vs Int}</h2>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">def</span> <span class="fu">findFirstInt</span>(key: Int, seq: List[Int]): Option[Int] = {
+  <span class="kw">def</span> <span class="fu">aux</span>(i: Int, seq: List[Int]): Option[Int] = {
+    seq <span class="kw">match</span> {
+      <span class="kw">case</span> Nil =&gt; None
+      <span class="kw">case</span> x :: _ <span class="kw">if</span> x == key =&gt; Some(i)
+      <span class="kw">case</span> _ :: rest =&gt; <span class="fu">aux</span>(i + <span class="dv">1</span>, rest)
+    }
+  }
+  <span class="fu">aux</span>(<span class="dv">0</span>, seq)
+}</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">def</span> <span class="fu">findFirstString</span>(key: String, seq: List[String]): Option[Int] = {
+  <span class="kw">def</span> <span class="fu">aux</span>(i: Int, seq: List[String]): Option[Int] = {
+    seq <span class="kw">match</span> {
+      <span class="kw">case</span> Nil =&gt; None
+      <span class="kw">case</span> x :: _ <span class="kw">if</span> x == key =&gt; Some(i)
+      <span class="kw">case</span> _ :: rest =&gt; <span class="fu">aux</span>(i + <span class="dv">1</span>, rest)
+    }
+  }
+  <span class="fu">aux</span>(<span class="dv">0</span>, seq)
+}</code></pre></div>
+<p>瓜ふたつ．違いはどこ？</p>
+<h2 id="findfirststring-vs-int-1">findFirst{String vs Int}</h2>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">def</span> <span class="fu">findFirstInt</span>(key: Int, seq: List[Int]): Option[Int] = {
+  <span class="kw">def</span> <span class="fu">aux</span>(i: Int, seq: List[Int]): Option[Int] = {
+    seq <span class="kw">match</span> {
+      <span class="kw">case</span> Nil =&gt; None
+      <span class="kw">case</span> x :: _ <span class="kw">if</span> x == key =&gt; Some(i)
+      <span class="kw">case</span> _ :: rest =&gt; <span class="fu">aux</span>(i + <span class="dv">1</span>, rest)
+    }
+  }
+  <span class="fu">aux</span>(<span class="dv">0</span>, seq)
+}</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">def</span> <span class="fu">findFirstString</span>(key: String, seq: List[String]): Option[Int] = {
+  <span class="kw">def</span> <span class="fu">aux</span>(i: Int, seq: List[String]): Option[Int] = {
+    seq <span class="kw">match</span> {
+      <span class="kw">case</span> Nil =&gt; None
+      <span class="kw">case</span> x :: _ <span class="kw">if</span> x == key =&gt; Some(i)
+      <span class="kw">case</span> _ :: rest =&gt; <span class="fu">aux</span>(i + <span class="dv">1</span>, rest)
+    }
+  }
+  <span class="fu">aux</span>(<span class="dv">0</span>, seq)
+}</code></pre></div>
+<ol style="list-style-type: decimal">
+<li>関数名</li>
+</ol>
+<h2 id="findfirststring-vs-int-2">findFirst{String vs Int}</h2>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">def</span> <span class="fu">findFirstInt</span>(key: Int, seq: List[Int]): Option[Int] = {
+  <span class="kw">def</span> <span class="fu">aux</span>(i: Int, seq: List[Int]): Option[Int] = {
+    seq <span class="kw">match</span> {
+      <span class="kw">case</span> Nil =&gt; None
+      <span class="kw">case</span> x :: _ <span class="kw">if</span> x == key =&gt; Some(i)
+      <span class="kw">case</span> _ :: rest =&gt; <span class="fu">aux</span>(i + <span class="dv">1</span>, rest)
+    }
+  }
+  <span class="fu">aux</span>(<span class="dv">0</span>, seq)
+}</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">def</span> <span class="fu">findFirstString</span>(key: String, seq: List[String]): Option[Int] = {
+  <span class="kw">def</span> <span class="fu">aux</span>(i: Int, seq: List[String]): Option[Int] = {
+    seq <span class="kw">match</span> {
+      <span class="kw">case</span> Nil =&gt; None
+      <span class="kw">case</span> x :: _ <span class="kw">if</span> x == key =&gt; Some(i)
+      <span class="kw">case</span> _ :: rest =&gt; <span class="fu">aux</span>(i + <span class="dv">1</span>, rest)
+    }
+  }
+  <span class="fu">aux</span>(<span class="dv">0</span>, seq)
+}</code></pre></div>
+<ol style="list-style-type: decimal">
+<li>関数名</li>
+<li>引数の型</li>
+</ol>
+<h2 id="findfirststring-vs-int-3">findFirst{String vs Int}</h2>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">def</span> <span class="fu">findFirstInt</span>(key: Int, seq: List[Int]): Option[Int] = {
+  <span class="kw">def</span> <span class="fu">aux</span>(i: Int, seq: List[Int]): Option[Int] = {
+    seq <span class="kw">match</span> {
+      <span class="kw">case</span> Nil =&gt; None
+      <span class="kw">case</span> x :: _ <span class="kw">if</span> x == key =&gt; Some(i)
+      <span class="kw">case</span> _ :: rest =&gt; <span class="fu">aux</span>(i + <span class="dv">1</span>, rest)
+    }
+  }
+  <span class="fu">aux</span>(<span class="dv">0</span>, seq)
+}</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">def</span> <span class="fu">findFirstString</span>(key: String, seq: List[String]): Option[Int] = {
+  <span class="kw">def</span> <span class="fu">aux</span>(i: Int, seq: List[String]): Option[Int] = {
+    seq <span class="kw">match</span> {
+      <span class="kw">case</span> Nil =&gt; None
+      <span class="kw">case</span> x :: _ <span class="kw">if</span> x == key =&gt; Some(i)
+      <span class="kw">case</span> _ :: rest =&gt; <span class="fu">aux</span>(i + <span class="dv">1</span>, rest)
+    }
+  }
+  <span class="fu">aux</span>(<span class="dv">0</span>, seq)
+}</code></pre></div>
+<h2 id="関数の多重定義findfirst">関数の多重定義：findFirst</h2>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">def</span> <span class="fu">findFirst</span>(key: Int, seq: List[Int]): Option[Int] = {
+  <span class="kw">def</span> <span class="fu">aux</span>(i: Int, seq: List[Int]): Option[Int] = {
+    seq <span class="kw">match</span> {
+      <span class="kw">case</span> Nil =&gt; None
+      <span class="kw">case</span> x :: _ <span class="kw">if</span> x == key =&gt; Some(i)
+      <span class="kw">case</span> _ :: rest =&gt; <span class="fu">aux</span>(i + <span class="dv">1</span>, rest)
+    }
+  }
+  <span class="fu">aux</span>(<span class="dv">0</span>, seq)
+}</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">def</span> <span class="fu">findFirst</span>(key: String, seq: List[String]): Option[Int] = {
+  <span class="kw">def</span> <span class="fu">aux</span>(i: Int, seq: List[String]): Option[Int] = {
+    seq <span class="kw">match</span> {
+      <span class="kw">case</span> Nil =&gt; None
+      <span class="kw">case</span> x :: _ <span class="kw">if</span> x == key =&gt; Some(i)
+      <span class="kw">case</span> _ :: rest =&gt; <span class="fu">aux</span>(i + <span class="dv">1</span>, rest)
+    }
+  }
+  <span class="fu">aux</span>(<span class="dv">0</span>, seq)
+}</code></pre></div>
+<dl>
+<dt>多重定義 (Overloading)</dt>
+<dd>名前が同じで引数の型だけが異なる関数群を用意すること，あるいは同じ演算記号について引数の型に応じて異なる意味を与えること．
+</dd>
+</dl>
+<h2 id="型変数-a">型変数 A</h2>
+<p>型変数の導入: def findFirst[A] … 新たな型変数 A を導入する。その変数 A の有効範囲は def の範囲。 型変数 A の意味：「ある型があって、その名前をひとまず A としておこう」、(簡単に)「任意の型Aについて」 型構成子の型変数への適用: Array[A] Array[A]: 任意の型 A に関して、型構成子 Array を型Aについて特殊化したもの。 Arrayの場合 A はArray が表す配列が要素とするデータの型なので、Array[A] は、A型のデータを要素とする配列の型と読める。</p>
+<!-- Slide 8 -->
+<h2 id="class-arraytが提供する単相関数">class Array[T]が提供する単相関数</h2>
+<p>型変数に依存しない関数群 def isEmpty: Boolean def length: Int def size: Int</p>
+<!-- Slide 9 -->
+<h2 id="class-arraytが提供する多相関数">class Array[T]が提供する多相関数 </h2>
+<p>出現する型変数がTだけで、返り値の型が単純なもの def indexOf(T): int def forall((T) ⇒ Boolean): Boolean // ∀ exists((T) ⇒ Boolean): Boolean // ∃ def indexOf(T): int // Array(1, 2, 3).indexOf(3) =&gt; 2 def count(p: (T) ⇒ Boolean): Int // Range(1,…, 99).toArray.count(奇数) =&gt; 50</p>
+<!-- Slide 10 -->
+<h2 id="class-arraytが提供する多相関数-1">class Array[T]が提供する多相関数 </h2>
+<p>出現する型変数がTだけで、返り値の型がTを含むもの def head: T def last: T def init: Array[T] // Array(Vn, v) =&gt; Array(Vn) def tail: Array[T] // Array(v, Vn) =&gt; Array(Vn) def take(Int): Array[T] // Array(Vk, v, …) =&gt; Array(Vk) drop(Int): Array[T] // Array(Vk, v, …) =&gt; Array(v, …)</p>
+<!-- Slide 11 -->
+<h2 id="class-arraytが提供する多相関数-2">class Array[T]が提供する多相関数 </h2>
+<p>型変数Tが引数にも返り値にも出現するもの def filter((T) ⇒ Boolean): Array[T] // Array(1, 2, 3, 4, 5).filter(奇数) =&gt; Array(1, 3, 5) // Array(1, 2, 3, 4, 5).filter((n: Int) =&gt; n%2==1) def foldLeft<a href="B" class="uri">B</a> ((B, T) ⇒ B): B</p>
+<!-- Slide 12 -->
+<h2 id="trait-sett-が提供する関数">trait Set[T] が提供する関数</h2>
+<p>isEmpty: Boolean empty: Set[A] contains(A): Boolean diff(GenSet[A]): Set[A] union(GenSet[A]): Set[A] map<a href="(A)%20⇒%20B">B</a>: Set[B] // Array(1, 2, 3).map((x: Int) =&gt; x.toString) subsets(): Iterator[Set[A]] // Set(1, 2, 3).subsets().foreach(println)</p>
+<!-- Slide 13 -->
+<h2 id="scala-の-api-マニュアル">Scala の API マニュアル</h2>
+<p>Macユーザへのお薦め: Dash の利用（強力な検索能力） そうではない人は、本家のドキュメントをダウンロードして利用。 http://scala-lang.org/download/all.html を開き、自分が利用している Scala のバージョン(2.11.8)のページを開き、API DocsのZipファイルをダウンロードしたあとで展開して利用する。</p>
+<!-- Slide 14 -->
+<h2 id="section"></h2>
+<!-- Slide 15 -->
+<h2 id="クラスとcompanionオブジェクト連れ合いのオブジェクト">クラスとCompanionオブジェクト （連れ合いのオブジェクト）</h2>
+<p>class Int vs object Int class Array vs object Array class List vs object List trait Set vs object Set</p>
+<!-- Slide 16 -->
+<h2 id="class-int-vs-object-int">class Int vs object Int</h2>
+<p>算術演算子: +, -, *, / 比較演算子: &gt;, &lt;, == ビット毎演算子 min, max, signumclass Intに関する情報 MaxValue, MinValue toString</p>
+<!-- Slide 17 -->
+<h2 id="class-array-vs-object-array">class Array vs object Array</h2>
+<p>class Array についてすでに取り上げたので省略 object Array empty[T]: Array[T] emptyIntArray: Array[Int] fill<a href="Int">T</a>(⇒T): Array[T] // Array.fill(5)(3), Array.fill(100)(math.random) ofDim<a href="Int,%20Int">T</a>: Array[Array[T]] // Array.ofDim<a href="3,%204">Int</a> tabulate<a href="T,%20Int">T</a>((T) ⇒ T): Array[T]</p>
+<!-- Slide 18 -->
+<h2 id="object-list">object List</h2>
+<p>empty[A]: List[A] iterate<a href="A,%20int">A</a>((A) ⇒ A) //List.iterate(List.empty[Int], 4)((l: List[Int]) =&gt; 0::l) range<a href="T,%20T">T</a> // List.range(0, 20, 3)</p>
+<hr />
+<p><a href="/lecture/note/">トップページへ</a></p>
+</body>
+</html>

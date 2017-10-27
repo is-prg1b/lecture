@@ -4,7 +4,7 @@
 .DEFAULT: html
 all: html note quiz
 
-SLIDES   := $(basename $(notdir $(wildcard slide/lx*.md)))
+SLIDES   := $(basename $(notdir $(wildcard slide/*.md)))
 HTML_TMP := $(addprefix docs/tmp/,   $(addsuffix .html, $(SLIDES)))
 HTML     := $(addprefix docs/slide/, $(addsuffix .html, $(SLIDES)))
 PDF      := $(addprefix docs/pdf/,   $(addsuffix .pdf,  $(SLIDES)))

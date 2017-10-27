@@ -1,5 +1,6 @@
 package mandelbrot
 
+import scala.collection.mutable.ArraySeq
 import scala.math.{abs,min,max}
 
 import scalafx.Includes._
@@ -88,8 +89,8 @@ object Model {
    **/
 
   val NCOLOR = 256
-  val colors: Array[Color] =
-    Array.tabulate(NCOLOR){ i =>
+  val colors: ArraySeq[Color] =
+    ArraySeq.tabulate(NCOLOR){ i =>
       Color.hsb(30, 1,
         if (i == NCOLOR - 1) 1.0
         else ((i << 2) % NCOLOR) / NCOLOR.toDouble) }
