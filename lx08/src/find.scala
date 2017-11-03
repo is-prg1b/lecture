@@ -54,7 +54,7 @@ object Main {
   }
 
 
-  // 多層的な定義
+  // 多相的な定義
   def find[A](key: A, seq: List[A]): Option[Int] = {
     def aux(i: Int, seq: List[A]): Option[Int] = {
       seq match {
@@ -79,7 +79,7 @@ object Main {
 
     val dseq = List(1.41421, 2.23606, 2.64575, 3.14159)
 
-    println(f"    (5, iseq) => ${find(5, iseq)}")
+    println(f"    (5, $iseq) => ${find(5, iseq)}")
     println(f"    (Scala, $sseq) => ${find("Scala", sseq)}")
     println(f"    (2.64575, $dseq) => ${find(2.64575, dseq)}")
   }
