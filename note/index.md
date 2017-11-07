@@ -22,7 +22,7 @@ title: プログラミング第一
 
 - 11月3日 --- [講義資料](https://github.com/is-prg1b/lecture/raw/master/slide/day09.pdf) / サンプルコード (sbt project: `lx09`)
 
-- 11月6日 --- [講義資料](/lecture/slide/day10.html) / サンプルコード (sbt project: `lx09`)
+- 11月7日 --- [講義資料](/lecture/slide/day10.html) / サンプルコード (sbt project: `lx09`)
 
 # 講義内容についての質問など
 
