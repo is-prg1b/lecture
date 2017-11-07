@@ -72,7 +72,7 @@ object RegularExpressionVM {
        */
       val label1 = label0 + 1 // Split(L1, L3)
       val (label2, program1) = r1._compile(label1)
-      val label3 = label2 + 1 // Jump(l4)
+      val label3 = label2 + 1 // Jump(L4)
       val (label4, program2) = r2._compile(label3)
 
       val split = List(Split(label1, label3))
@@ -131,16 +131,13 @@ object RegularExpressionVM {
     def execute(_program: Program, s: String): Boolean = {
       val program = _program.toArray
       var threads = Queue[(ProgramCounter, StringIndex)]((0, 0))
-      var pc = 0
-      var i = 0
 
       object MatchFailure extends Exception
       while (!threads.isEmpty) {
         val ((_pc, _i), rest) = threads.dequeue
-        pc      = _pc
-        i       = _i
+        var pc  = _pc
+        var i   = _i
         threads = rest
-
 
         try {
           while (true) {

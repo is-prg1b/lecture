@@ -34,8 +34,9 @@ docs/slide/%.html: $(HTML_DEP) slide/%.md
 	@echo "pandoc: $(slide) => $(html1)"
 	@pandoc slide/slide.yaml $(md) \
 	  --include-in-header=slide/slide.header \
-	  --to=revealjs --slide-level=2 \
-	  --template=lib/default.revealjs \
+	  --from markdown+smart \
+	  --to revealjs --slide-level=2 \
+	  --template lib/default.revealjs \
 	  --standalone \
 	  --output=$(html1) \
 	  -V history=false \
@@ -43,8 +44,7 @@ docs/slide/%.html: $(HTML_DEP) slide/%.md
  	  -V theme=serif \
 	  -V slideNumber=true \
 	  -V width=1280 -V height=1024 \
-	  --mathjax \
-	  --smart
+	  --mathjax
 
 	@# Then, PhantomJS is used to patch the temporary HTML and finishes it.
 	@# tmp/*.html -> ../*.html
@@ -61,8 +61,8 @@ docs/note/%.html: note/%.md
 	@echo "pandoc: $(note) => $(html)"
 	@pandoc note/note.yaml lib/header.md $(md) lib/footer.md \
 	  --include-in-header=note/note.header \
-	  --standalone --to=html --output=$(html) \
-	  --smart
+	  --from markdown+smart \
+	  --standalone --to=html --output=$(html)
 
 quiz: $(QUIZHTML)
 docs/quiz/%.html: quiz/%.md
@@ -73,6 +73,7 @@ docs/quiz/%.html: quiz/%.md
 	@echo "pandoc: $(quiz) => $(html)"
 	@pandoc quiz/quiz.yaml $(md) \
 	  --include-in-header=quiz/quiz.header \
+	  --from markdown+smart \
 	  --standalone --to=html --output=$(html) \
 	  --highlight-style=monochrome \
-	  --smart
+	  --mathjax
