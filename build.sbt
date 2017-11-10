@@ -49,6 +49,7 @@ lazy val common = Seq(
 )
 
 lazy val common_fx = common ++ Seq(libraryDependencies ++= Seq(scala_fx))
+lazy val common_actor = common ++ Seq(libraryDependencies ++= Seq(akka_actor))
 
 // サブプロジェクト群の定義．このように定めることで，共通の `build.sbt` でたくさんのプロジェクトの設定を一括して施しています．
 lazy val root = (project in file(".")).settings(common)
@@ -74,4 +75,6 @@ lazy val lx05 = (project in file("lx05")).settings(common_fx)
 lazy val lx06 = (project in file("lx06")).settings(common_fx)
 lazy val lx07 = (project in file("lx07")).settings(common_fx)
 lazy val lx08 = (project in file("lx08")).settings(common_fx)
-lazy val lx09 = (project in file("lx09")).settings(common_fx)
+lazy val lx09 = (project in file("lx09")).settings(common)
+lazy val lx10 = (project in file("lx09")).settings(common)
+lazy val lx11 = (project in file("lx11")).settings(common)

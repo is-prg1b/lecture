@@ -24,6 +24,8 @@ title: プログラミング第一
 
 - 11月7日 --- [講義資料](/lecture/slide/day10.html) / サンプルコード (sbt project: `lx09`)
 
+- 11月10日 --- [講義資料](/lecture/slide/day11.html) / サンプルコード (sbt project: `lx11`)
+
 # 講義内容についての質問など
 
 [質問，疑問等の受け付け先](https://github.com/is-prg1b/lecture/issues/new)．受け付けた質問は教員，TA，履修生で共有されます．これ以外の人々には公開されません．
