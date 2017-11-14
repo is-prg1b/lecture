@@ -1,21 +1,10 @@
 // ライブラリ群
 
-val scalactic = "org.scalactic" %% "scalactic" % "3.0.1"
-
 // テストのために使う ScalaTest ライブラリ
 val scalatest = "org.scalatest" %% "scalatest" % "3.0.1" % "test"
 
-// データ生成テストのために使う ScalaCheck ライブラリ
-val scalacheck = "org.scalacheck" %% "scalacheck" % "1.13.4" % "test"
-
-// 並行処理のための Akka Actor ライブラリ
-val akka_actor = "com.typesafe.akka" % "akka-actor_2.12" % "2.5.4"
-
 // GUI 記述のための ScalaFX ライブラリ
 val scala_fx = "org.scalafx" %% "scalafx" % "8.0.102-R11"
-
-val silencer_plugin = "com.github.ghik" %% "silencer-plugin" % "0.5"
-val silencer_lib    = "com.github.ghik" %% "silencer-lib"    % "0.5"
 
 // 以下の設定は脇田がスライドを作成するために sbt のなかから make コマンドを実行するため
 import scala.sys.process._
@@ -30,10 +19,7 @@ lazy val common = Seq(
   scalacOptions := Seq("-feature", "-unchecked", "-deprecation",
     "-Ywarn-dead-code", "-Ywarn-unused", "-Ywarn-unused-import"),
 
-  addCompilerPlugin(silencer_plugin),
-
-  // libraryDependencies ++= Seq(scalactic, scalatest, scalacheck),
-  libraryDependencies ++= Seq(scalatest, silencer_lib),
+  libraryDependencies ++= Seq(scalatest),
 
   fork in Test := true,
   fork in run := true,
@@ -49,7 +35,6 @@ lazy val common = Seq(
 )
 
 lazy val common_fx = common ++ Seq(libraryDependencies ++= Seq(scala_fx))
-lazy val common_actor = common ++ Seq(libraryDependencies ++= Seq(akka_actor))
 
 // サブプロジェクト群の定義．このように定めることで，共通の `build.sbt` でたくさんのプロジェクトの設定を一括して施しています．
 lazy val root = (project in file(".")).settings(common)
@@ -78,3 +63,4 @@ lazy val lx08 = (project in file("lx08")).settings(common_fx)
 lazy val lx09 = (project in file("lx09")).settings(common)
 lazy val lx10 = (project in file("lx09")).settings(common)
 lazy val lx11 = (project in file("lx11")).settings(common)
+lazy val lx12 = (project in file("lx12")).settings(common)

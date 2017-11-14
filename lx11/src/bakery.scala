@@ -10,9 +10,9 @@ object Bakery {
   }
 
   def loop(secs_limit: Int) {
-    t_start = seconds()
+    // t_start = seconds()
     for (t <- 1 to Int.MaxValue) {
-      if (seconds() - t_start > secs_limit) return
+      if (seconds() > secs_limit) return
       Thread.sleep(1000)
       println(f"t = $t%2d")
     }
